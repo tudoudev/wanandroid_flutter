@@ -1,10 +1,8 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 import 'package:wanandroid_flutter/base/base_state.dart';
-import 'package:wanandroid_flutter/base/base_view_model.dart';
-import 'package:wanandroid_flutter/base/multi_state_widget.dart';
+import 'package:wanandroid_flutter/base/page_state_provider.dart';
 import 'package:wanandroid_flutter/base/refresh_widget.dart';
 import 'package:wanandroid_flutter/base/selector_widget.dart';
 import 'package:wanandroid_flutter/page/home/model/article_entity.dart';
@@ -12,7 +10,6 @@ import 'package:wanandroid_flutter/page/home/model/banner_entity.dart';
 import 'package:wanandroid_flutter/page/home/viewmodel/home_view_model.dart';
 import 'package:wanandroid_flutter/page/home/widget/article_widget.dart';
 import 'package:wanandroid_flutter/page/main/view/drawer_page.dart';
-import 'package:wanandroid_flutter/res/colors.dart';
 import 'package:wanandroid_flutter/res/strings.dart';
 
 /*
@@ -60,57 +57,49 @@ class _HomePageState extends BaseState<HomeViewModel, HomePage> with AutomaticKe
       appBar: AppBar(
         title: const Text(MStrings.commonText_1),
       ),
-      body: ChangeNotifierProvider(
-        create: (_) => mViewModel,
-        child: SelectorWidget<HomeViewModel, PageState>(
-          selector: (context, _) => mViewModel.pageState,
-          builder: (context, it, child) {
-            return PageStateWidget(
-              pageState: mViewModel.pageState,
-              onLoadRetry: () => mViewModel.initView(),
-              builder: (context) => Column(
-                children: [
-                  SelectorWidget<HomeViewModel, SelectorData<List<BannerEntity>>>(
-                    selector: (context, _) => mViewModel.bannerEntityList,
-                    builder: (context, it, child) {
-                      return SizedBox(
-                        height: 200.w,
-                        child: Swiper(
-                          itemBuilder: (BuildContext context, int index) {
-                            return Image.network(it.value![index].imagePath, fit: BoxFit.fill);
-                          },
-                          itemCount: it.value!.length,
-                          pagination: const SwiperPagination(),
-                        ),
-                      );
+      body: PageStateProvider(
+        viewModel: mViewModel,
+        onLoadRetry: () => mViewModel.initView(),
+        builder: (context) => Column(
+          children: [
+            SelectorWidget<HomeViewModel, SelectorData<List<BannerEntity>>>(
+              selector: (context, _) => mViewModel.bannerEntityList,
+              builder: (context, it, child) {
+                return SizedBox(
+                  height: 200.w,
+                  child: Swiper(
+                    itemBuilder: (BuildContext context, int index) {
+                      return Image.network(it.value![index].imagePath, fit: BoxFit.fill);
                     },
+                    itemCount: it.value!.length,
+                    pagination: const SwiperPagination(),
                   ),
-                  SelectorWidget<HomeViewModel, SelectorData<List<ArticleEntity>>>(
-                    selector: (context, _) => mViewModel.articleEntityList,
-                    builder: (context, it, child) {
-                      return Expanded(
-                        child: RefreshWidget(
-                          viewModel: mViewModel,
-                          onRefresh: () async => await mViewModel.getArticleList(),
-                          onLoad: () async => await mViewModel.getArticleList(),
-                          child: ListView.separated(
-                            separatorBuilder: (context, index) {
-                              return Divider(thickness: 0.3.w, height: 0);
-                            },
-                            itemCount: it.value!.length,
-                            controller: _scrollController,
-                            itemBuilder: (context, index) {
-                              return ArticleWidget(item: it.value![index]);
-                            },
-                          ),
-                        ),
-                      );
-                    },
+                );
+              },
+            ),
+            SelectorWidget<HomeViewModel, SelectorData<List<ArticleEntity>>>(
+              selector: (context, _) => mViewModel.articleEntityList,
+              builder: (context, it, child) {
+                return Expanded(
+                  child: RefreshWidget(
+                    viewModel: mViewModel,
+                    onRefresh: () async => await mViewModel.getArticleList(),
+                    onLoad: () async => await mViewModel.getArticleList(),
+                    child: ListView.separated(
+                      separatorBuilder: (context, index) {
+                        return Divider(thickness: 0.3.w, height: 0);
+                      },
+                      itemCount: it.value!.length,
+                      controller: _scrollController,
+                      itemBuilder: (context, index) {
+                        return ArticleWidget(item: it.value![index]);
+                      },
+                    ),
                   ),
-                ],
-              ),
-            );
-          },
+                );
+              },
+            ),
+          ],
         ),
       ),
       floatingActionButton: !_isShowFAB

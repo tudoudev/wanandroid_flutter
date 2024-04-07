@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:wanandroid_flutter/base/base_state.dart';
 import 'package:wanandroid_flutter/base/base_view_model.dart';
-import 'package:wanandroid_flutter/base/multi_state_widget.dart';
+import 'package:wanandroid_flutter/base/page_state_provider.dart';
 import 'package:wanandroid_flutter/base/refresh_widget.dart';
 import 'package:wanandroid_flutter/base/selector_widget.dart';
 import 'package:wanandroid_flutter/constant/router_constant.dart';
@@ -51,125 +51,119 @@ class _ArticlePageState extends BaseState<WxChatViewModel, ArticlePage> with Aut
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      body: ChangeNotifierProvider(
-          create: (_) => mViewModel,
-          child: SelectorWidget<WxChatViewModel, PageState>(
-              selector: (context, _) => mViewModel.pageState,
+      body: PageStateProvider(
+        viewModel: mViewModel,
+        onLoadRetry: () => mViewModel.wxArticleList(RequestType.page, widget.id),
+        builder: (context) => Column(
+          children: [
+            SelectorWidget<WxChatViewModel, SelectorData<List<ArticleEntity>>>(
+              selector: (context, _) => mViewModel.wxArticleEntityList,
               builder: (context, it, child) {
-                return PageStateWidget(
-                  pageState: mViewModel.pageState,
-                  onLoadRetry: () => mViewModel.wxArticleList(RequestType.page, widget.id),
-                  builder: (context) => Column(
-                    children: [
-                      SelectorWidget<WxChatViewModel, SelectorData<List<ArticleEntity>>>(
-                        selector: (context, _) => mViewModel.wxArticleEntityList,
-                        builder: (context, it, child) {
-                          return Expanded(
-                            child: RefreshWidget(
-                              viewModel: mViewModel,
-                              onRefresh: () async => await mViewModel.wxArticleList(RequestType.refresh, widget.id),
-                              onLoad: () async => await mViewModel.wxArticleList(RequestType.refresh, widget.id),
-                              child: ListView.separated(
-                                controller: _scrollController,
-                                separatorBuilder: (context, index) {
-                                  return Divider(thickness: 0.3.w, height: 0);
-                                },
-                                itemCount: it.value!.length,
-                                itemBuilder: (context, index) {
-                                  var item = it.value![index];
-                                  return InkWell(
-                                    onTap: () {
-                                      context.goto(RouterConstant.webView, extra: {'url': item.link, 'title': item.title});
-                                    },
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.fromLTRB(16.w, 10.w, 16.w, 10.w),
-                                          child: Row(
-                                            children: [
-                                              Visibility(
-                                                  visible: item.isTop,
-                                                  child: Container(
-                                                    decoration: BoxDecoration(
-                                                      border: Border.all(color: MColors.c_f44336, width: 0.5.w),
-                                                      borderRadius: BorderRadius.all(Radius.circular(2.w)),
-                                                    ),
-                                                    padding: EdgeInsets.fromLTRB(4.w, 2.w, 4.w, 2.w),
-                                                    margin: EdgeInsets.fromLTRB(0, 0, 4.w, 0),
-                                                    child: Text(MStrings.homeText_1, style: TextStyle(fontSize: 10.sp, color: MColors.c_f44336)),
-                                                  )),
-                                              Visibility(
-                                                  visible: item.fresh,
-                                                  child: Container(
-                                                    decoration: BoxDecoration(
-                                                      border: Border.all(color: MColors.c_f44336, width: 0.5.w),
-                                                      borderRadius: BorderRadius.all(Radius.circular(2.w)),
-                                                    ),
-                                                    padding: EdgeInsets.fromLTRB(4.w, 2.w, 4.w, 2.w),
-                                                    margin: EdgeInsets.fromLTRB(0, 0, 4.w, 0),
-                                                    child: Text(MStrings.homeText_2, style: TextStyle(fontSize: 10.sp, color: MColors.c_f44336)),
-                                                  )),
-                                              Visibility(
-                                                  visible: item.tags.isNotEmpty,
-                                                  child: Container(
-                                                    decoration: BoxDecoration(
-                                                      border: Border.all(color: MColors.c_a00bcd4, width: 0.5.w),
-                                                      borderRadius: BorderRadius.all(Radius.circular(2.w)),
-                                                    ),
-                                                    padding: EdgeInsets.fromLTRB(4.w, 2.w, 4.w, 2.w),
-                                                    margin: EdgeInsets.fromLTRB(0, 0, 4.w, 0),
-                                                    child: Text(item.tags.isNotEmpty ? item.tags[0].name : "", style: TextStyle(fontSize: 10.sp, color: MColors.c_a00bcd4)),
-                                                  )),
-                                              Text(
-                                                item.author.isNotEmpty ? item.author : item.shareUser,
-                                                style: TextStyle(fontSize: 12.sp, color: MColors.gray_66),
-                                                textAlign: TextAlign.left,
-                                              ),
-                                              Expanded(
-                                                child: Text(
-                                                  item.niceDate,
-                                                  style: TextStyle(fontSize: 12.sp, color: MColors.gray_66),
-                                                  textAlign: TextAlign.right,
-                                                ),
-                                              ),
-                                            ],
+                return Expanded(
+                  child: RefreshWidget(
+                    viewModel: mViewModel,
+                    onRefresh: () async => await mViewModel.wxArticleList(RequestType.refresh, widget.id),
+                    onLoad: () async => await mViewModel.wxArticleList(RequestType.refresh, widget.id),
+                    child: ListView.separated(
+                      controller: _scrollController,
+                      separatorBuilder: (context, index) {
+                        return Divider(thickness: 0.3.w, height: 0);
+                      },
+                      itemCount: it.value!.length,
+                      itemBuilder: (context, index) {
+                        var item = it.value![index];
+                        return InkWell(
+                          onTap: () {
+                            context.goto(RouterConstant.webView, extra: {'url': item.link, 'title': item.title});
+                          },
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(16.w, 10.w, 16.w, 10.w),
+                                child: Row(
+                                  children: [
+                                    Visibility(
+                                        visible: item.isTop,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            border: Border.all(color: MColors.c_f44336, width: 0.5.w),
+                                            borderRadius: BorderRadius.all(Radius.circular(2.w)),
                                           ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.fromLTRB(16.w, 0.w, 16.w, 0.w),
-                                          child: Text(item.title, style: TextStyle(fontSize: 14.sp)),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.fromLTRB(16.w, 10.w, 16.w, 10.w),
-                                          child: Row(
-                                            children: [
-                                              Text(
-                                                "${item.superChapterName} / ${item.chapterName}",
-                                                style: TextStyle(fontSize: 12.sp, color: MColors.gray_66),
-                                              ),
-                                              const Spacer(),
-                                              Icon(
-                                                Icons.favorite_border,
-                                                size: 22.w,
-                                                color: MColors.gray_66,
-                                              ),
-                                            ],
+                                          padding: EdgeInsets.fromLTRB(4.w, 2.w, 4.w, 2.w),
+                                          margin: EdgeInsets.fromLTRB(0, 0, 4.w, 0),
+                                          child: Text(MStrings.homeText_1, style: TextStyle(fontSize: 10.sp, color: MColors.c_f44336)),
+                                        )),
+                                    Visibility(
+                                        visible: item.fresh,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            border: Border.all(color: MColors.c_f44336, width: 0.5.w),
+                                            borderRadius: BorderRadius.all(Radius.circular(2.w)),
                                           ),
-                                        ),
-                                      ],
+                                          padding: EdgeInsets.fromLTRB(4.w, 2.w, 4.w, 2.w),
+                                          margin: EdgeInsets.fromLTRB(0, 0, 4.w, 0),
+                                          child: Text(MStrings.homeText_2, style: TextStyle(fontSize: 10.sp, color: MColors.c_f44336)),
+                                        )),
+                                    Visibility(
+                                        visible: item.tags.isNotEmpty,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            border: Border.all(color: MColors.c_a00bcd4, width: 0.5.w),
+                                            borderRadius: BorderRadius.all(Radius.circular(2.w)),
+                                          ),
+                                          padding: EdgeInsets.fromLTRB(4.w, 2.w, 4.w, 2.w),
+                                          margin: EdgeInsets.fromLTRB(0, 0, 4.w, 0),
+                                          child: Text(item.tags.isNotEmpty ? item.tags[0].name : "", style: TextStyle(fontSize: 10.sp, color: MColors.c_a00bcd4)),
+                                        )),
+                                    Text(
+                                      item.author.isNotEmpty ? item.author : item.shareUser,
+                                      style: TextStyle(fontSize: 12.sp, color: MColors.gray_66),
+                                      textAlign: TextAlign.left,
                                     ),
-                                  );
-                                },
+                                    Expanded(
+                                      child: Text(
+                                        item.niceDate,
+                                        style: TextStyle(fontSize: 12.sp, color: MColors.gray_66),
+                                        textAlign: TextAlign.right,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                      ),
-                    ],
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(16.w, 0.w, 16.w, 0.w),
+                                child: Text(item.title, style: TextStyle(fontSize: 14.sp)),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(16.w, 10.w, 16.w, 10.w),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "${item.superChapterName} / ${item.chapterName}",
+                                      style: TextStyle(fontSize: 12.sp, color: MColors.gray_66),
+                                    ),
+                                    const Spacer(),
+                                    Icon(
+                                      Icons.favorite_border,
+                                      size: 22.w,
+                                      color: MColors.gray_66,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 );
-              })),
+              },
+            ),
+          ],
+        ),
+      ),
       floatingActionButton: !_isShowFAB
           ? null
           : FloatingActionButton(

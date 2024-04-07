@@ -7,12 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wanandroid_flutter/base/base_state.dart';
 import 'package:wanandroid_flutter/base/base_view_model.dart';
-import 'package:wanandroid_flutter/base/multi_state_widget.dart';
+import 'package:wanandroid_flutter/base/page_state_provider.dart';
 import 'package:wanandroid_flutter/base/selector_widget.dart';
 import 'package:wanandroid_flutter/page/main/view/drawer_page.dart';
 import 'package:wanandroid_flutter/page/project/view/project_article_page.dart';
 import 'package:wanandroid_flutter/page/project/viewmodel/project_view_model.dart';
-import 'package:wanandroid_flutter/page/home/view/article_page.dart';
 import 'package:wanandroid_flutter/res/strings.dart';
 
 class ProjectPage extends StatefulWidget {
@@ -40,37 +39,29 @@ class _ProjectPageState extends BaseState<ProjectViewModel, ProjectPage> with Au
       appBar: AppBar(
         title: const Text(MStrings.commonText_5),
       ),
-      body: ChangeNotifierProvider(
-        create: (_) => mViewModel,
-        child: SelectorWidget<ProjectViewModel, PageState>(
-          selector: (context, _) => mViewModel.pageState,
-          builder: (context, it, child) {
-            _tabController = TabController(length: mViewModel.chaptersEntityList.value!.length, vsync: this);
-            return PageStateWidget(
-              pageState: mViewModel.pageState,
-              onLoadRetry: () => mViewModel.initView(),
-              builder: (context) => Column(
-                children: [
-                  Container(
-                    color: Theme.of(context).primaryColor,
-                    child: TabBar(
-                      controller: _tabController,
-                      tabAlignment: TabAlignment.start,
-                      indicatorSize: TabBarIndicatorSize.tab,
-                      isScrollable: true,
-                      tabs: mViewModel.chaptersEntityList.value!.map((item) => Tab(text: item.name)).toList(),
-                    ),
-                  ),
-                  Expanded(
-                    child: TabBarView(
-                      controller: _tabController,
-                      children: mViewModel.chaptersEntityList.value!.map((item) => ProjectArticlePage(id: item.id)).toList(),
-                    ),
-                  )
-                ],
+      body: PageStateProvider(
+        viewModel: mViewModel,
+        onLoadRetry: () => mViewModel.initView(),
+        onInit: () => _tabController = TabController(length: mViewModel.chaptersEntityList.value!.length, vsync: this),
+        builder: (context) => Column(
+          children: [
+            Container(
+              color: Theme.of(context).primaryColor,
+              child: TabBar(
+                controller: _tabController,
+                tabAlignment: TabAlignment.start,
+                indicatorSize: TabBarIndicatorSize.tab,
+                isScrollable: true,
+                tabs: mViewModel.chaptersEntityList.value!.map((item) => Tab(text: item.name)).toList(),
               ),
-            );
-          },
+            ),
+            Expanded(
+              child: TabBarView(
+                controller: _tabController,
+                children: mViewModel.chaptersEntityList.value!.map((item) => ProjectArticlePage(id: item.id)).toList(),
+              ),
+            )
+          ],
         ),
       ),
     );

@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:wanandroid_flutter/base/base_state.dart';
 import 'package:wanandroid_flutter/base/base_view_model.dart';
-import 'package:wanandroid_flutter/base/multi_state_widget.dart';
+import 'package:wanandroid_flutter/base/page_state_provider.dart';
 import 'package:wanandroid_flutter/base/refresh_widget.dart';
 import 'package:wanandroid_flutter/base/selector_widget.dart';
 import 'package:wanandroid_flutter/page/home/model/article_entity.dart';
@@ -58,42 +58,36 @@ class _SquarePageState extends BaseState<SquareViewModel, SquarePage> with Autom
       appBar: AppBar(
         title: const Text(MStrings.commonText_2),
       ),
-      body: ChangeNotifierProvider(
-          create: (_) => mViewModel,
-          child: SelectorWidget<SquareViewModel, PageState>(
-              selector: (context, _) => mViewModel.pageState,
+      body: PageStateProvider(
+        viewModel: mViewModel,
+        onLoadRetry: () => mViewModel.initView(RequestType.page),
+        builder: (context) => Column(
+          children: [
+            SelectorWidget<SquareViewModel, SelectorData<List<ArticleEntity>>>(
+              selector: (context, _) => mViewModel.articleEntityList,
               builder: (context, it, child) {
-                return PageStateWidget(
-                  pageState: mViewModel.pageState,
-                  onLoadRetry: () => mViewModel.initView(RequestType.page),
-                  builder: (context) => Column(
-                    children: [
-                      SelectorWidget<SquareViewModel, SelectorData<List<ArticleEntity>>>(
-                        selector: (context, _) => mViewModel.articleEntityList,
-                        builder: (context, it, child) {
-                          return Expanded(
-                            child: RefreshWidget(
-                              viewModel: mViewModel,
-                              onRefresh: () async => await mViewModel.initView(RequestType.refresh),
-                              onLoad: () async => await mViewModel.initView(RequestType.refresh),
-                              child: ListView.separated(
-                                controller: _scrollController,
-                                separatorBuilder: (context, index) {
-                                  return Divider(thickness: 0.3.w, height: 0);
-                                },
-                                itemCount: it.value!.length,
-                                itemBuilder: (context, index) {
-                                  return ArticleWidget(item: it.value![index]);
-                                },
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ],
+                return Expanded(
+                  child: RefreshWidget(
+                    viewModel: mViewModel,
+                    onRefresh: () async => await mViewModel.initView(RequestType.refresh),
+                    onLoad: () async => await mViewModel.initView(RequestType.refresh),
+                    child: ListView.separated(
+                      controller: _scrollController,
+                      separatorBuilder: (context, index) {
+                        return Divider(thickness: 0.3.w, height: 0);
+                      },
+                      itemCount: it.value!.length,
+                      itemBuilder: (context, index) {
+                        return ArticleWidget(item: it.value![index]);
+                      },
+                    ),
                   ),
                 );
-              })),
+              },
+            ),
+          ],
+        ),
+      ),
       floatingActionButton: !_isShowFAB
           ? null
           : FloatingActionButton(

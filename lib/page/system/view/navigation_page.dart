@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:wanandroid_flutter/base/base_state.dart';
 import 'package:wanandroid_flutter/base/base_view_model.dart';
-import 'package:wanandroid_flutter/base/multi_state_widget.dart';
+import 'package:wanandroid_flutter/base/page_state_provider.dart';
 import 'package:wanandroid_flutter/base/refresh_widget.dart';
 import 'package:wanandroid_flutter/base/selector_widget.dart';
 import 'package:wanandroid_flutter/constant/router_constant.dart';
@@ -50,81 +50,73 @@ class _NavigationPageState extends BaseState<SystemViewModel, NavigationPage> wi
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      body: ChangeNotifierProvider(
-          create: (_) => mViewModel,
-          child: SelectorWidget<SystemViewModel, PageState>(
-              selector: (context, _) => mViewModel.pageState,
+      body: PageStateProvider(
+        viewModel: mViewModel,
+        onLoadRetry: () => mViewModel.naviJson(RequestType.page),
+        builder: (context) => Column(
+          children: [
+            SelectorWidget<SystemViewModel, SelectorData<List<NavigationEntity>>>(
+              selector: (context, _) => mViewModel.navigationEntityList,
               builder: (context, it, child) {
-                return PageStateWidget(
-                  pageState: mViewModel.pageState,
-                  onLoadRetry: () => mViewModel.naviJson(RequestType.page),
-                  builder: (context) => Column(
-                    children: [
-                      SelectorWidget<SystemViewModel, SelectorData<List<NavigationEntity>>>(
-                        selector: (context, _) => mViewModel.navigationEntityList,
-                        builder: (context, it, child) {
-                          return Expanded(
-                            child: RefreshWidget(
-                              viewModel: mViewModel,
-                              onRefresh: () async => await mViewModel.naviJson(RequestType.refresh),
-                              child: ListView.separated(
-                                separatorBuilder: (context, index) {
-                                  return Divider(thickness: 0.3.w, height: 0);
-                                },
-                                controller: _scrollController,
-                                itemCount: it.value!.length,
-                                itemBuilder: (context, index) {
-                                  var item = it.value![index];
-                                  return Padding(
-                                    padding: EdgeInsets.fromLTRB(16.w, 8.w, 16.w, 8.w),
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          alignment: Alignment.centerLeft,
-                                          padding: EdgeInsets.only(bottom: 8.w),
-                                          child: Text(
-                                            item.name,
-                                            style: TextStyle(fontSize: 15.sp),
-                                            textAlign: TextAlign.left,
-                                          ),
-                                        ),
-                                        Container(
-                                          alignment: Alignment.centerLeft,
-                                          child: Wrap(
-                                            spacing: 2.w,
-                                            children: item.articles
-                                                .map((e) => InkWell(
-                                                      onTap: () {
-                                                        context.goto(RouterConstant.webView, extra: {'url': e.link, 'title': e.title});
-                                                      },
-                                                      child: Chip(
-                                                        label: Text(
-                                                          e.title,
-                                                          style: TextStyle(
-                                                              fontSize: 10.sp,
-                                                              color: Color.fromARGB(255, Random().nextInt(190), Random().nextInt(190), Random().nextInt(190)),
-                                                              fontStyle: FontStyle.italic),
-                                                        ),
-                                                        labelPadding: EdgeInsets.only(left: 2.w, right: 2.w),
-                                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.w)),
-                                                      ),
-                                                    ))
-                                                .toList(),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  );
-                                },
+                return Expanded(
+                  child: RefreshWidget(
+                    viewModel: mViewModel,
+                    onRefresh: () async => await mViewModel.naviJson(RequestType.refresh),
+                    child: ListView.separated(
+                      separatorBuilder: (context, index) {
+                        return Divider(thickness: 0.3.w, height: 0);
+                      },
+                      controller: _scrollController,
+                      itemCount: it.value!.length,
+                      itemBuilder: (context, index) {
+                        var item = it.value![index];
+                        return Padding(
+                          padding: EdgeInsets.fromLTRB(16.w, 8.w, 16.w, 8.w),
+                          child: Column(
+                            children: [
+                              Container(
+                                alignment: Alignment.centerLeft,
+                                padding: EdgeInsets.only(bottom: 8.w),
+                                child: Text(
+                                  item.name,
+                                  style: TextStyle(fontSize: 15.sp),
+                                  textAlign: TextAlign.left,
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                      ),
-                    ],
+                              Container(
+                                alignment: Alignment.centerLeft,
+                                child: Wrap(
+                                  spacing: 2.w,
+                                  children: item.articles
+                                      .map((e) => InkWell(
+                                            onTap: () {
+                                              context.goto(RouterConstant.webView, extra: {'url': e.link, 'title': e.title});
+                                            },
+                                            child: Chip(
+                                              label: Text(
+                                                e.title,
+                                                style: TextStyle(
+                                                    fontSize: 10.sp, color: Color.fromARGB(255, Random().nextInt(190), Random().nextInt(190), Random().nextInt(190)), fontStyle: FontStyle.italic),
+                                              ),
+                                              labelPadding: EdgeInsets.only(left: 2.w, right: 2.w),
+                                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.w)),
+                                            ),
+                                          ))
+                                      .toList(),
+                                ),
+                              )
+                            ],
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 );
-              })),
+              },
+            ),
+          ],
+        ),
+      ),
       floatingActionButton: !_isShowFAB
           ? null
           : FloatingActionButton(
