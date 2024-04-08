@@ -3,6 +3,7 @@ class MStrings {
 
   /// ****** common ******
   static const String commonNoData = "--";
+  static const String commonExit = "再次点击退出应用";
 
   //上拉加载
   static const String commonDragText = "上拉加载";
