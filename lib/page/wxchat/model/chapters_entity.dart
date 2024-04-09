@@ -1,6 +1,6 @@
-import 'package:wanandroid_flutter/generated/json/base/json_field.dart';
 import 'dart:convert';
 
+import 'package:wanandroid_flutter/generated/json/base/json_field.dart';
 import 'package:wanandroid_flutter/generated/json/chapters_entity.g.dart';
 
 @JsonSerializable()

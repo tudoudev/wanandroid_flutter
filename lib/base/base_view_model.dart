@@ -7,7 +7,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:wanandroid_flutter/base/base_entity.dart';
 import 'package:wanandroid_flutter/base/selector_widget.dart';
 import 'package:wanandroid_flutter/constant/common_constant.dart';
-import 'package:wanandroid_flutter/res/strings.dart';
+import 'package:wanandroid_flutter/util/string_util.dart';
 
 class BaseViewModel extends ChangeNotifier {
   //页面请求状态
@@ -76,7 +76,7 @@ class BaseViewModel extends ChangeNotifier {
     }
     //加载框
     if (requestType == RequestType.dialog) {
-      EasyLoading.show(status: MStrings.commonReadyText);
+      EasyLoading.show(status: StringUtil.get().commonReadyText);
     }
   }
 
@@ -130,7 +130,7 @@ class BaseViewModel extends ChangeNotifier {
     }
     //Http错误
     else {
-      message = MStrings.commonOnFailure;
+      message = StringUtil.get().commonOnFailure;
     }
     //加载界面
     if (requestType == RequestType.page) {

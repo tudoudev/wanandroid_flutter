@@ -4,7 +4,7 @@ import 'package:wanandroid_flutter/base/page_state_provider.dart';
 import 'package:wanandroid_flutter/page/home/view/article_page.dart';
 import 'package:wanandroid_flutter/page/main/view/drawer_page.dart';
 import 'package:wanandroid_flutter/page/wxchat/viewmodel/wxchat_view_model.dart';
-import 'package:wanandroid_flutter/res/strings.dart';
+import 'package:wanandroid_flutter/util/string_util.dart';
 
 /*
  * Description：<公众号>
@@ -34,7 +34,7 @@ class _WxChatPageState extends BaseState<WxChatViewModel, WxChatPage> with Autom
     return Scaffold(
       drawer: const DrawerScreen(),
       appBar: AppBar(
-        title: const Text(MStrings.commonText_3),
+        title: Text(StringUtil.get().commonText_3),
       ),
       body: PageStateProvider(
         viewModel: mViewModel,

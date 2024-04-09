@@ -4,15 +4,12 @@
  * Time：2024/3/8  09:10
  */
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:wanandroid_flutter/base/base_state.dart';
-import 'package:wanandroid_flutter/base/base_view_model.dart';
 import 'package:wanandroid_flutter/base/page_state_provider.dart';
-import 'package:wanandroid_flutter/base/selector_widget.dart';
 import 'package:wanandroid_flutter/page/main/view/drawer_page.dart';
 import 'package:wanandroid_flutter/page/project/view/project_article_page.dart';
 import 'package:wanandroid_flutter/page/project/viewmodel/project_view_model.dart';
-import 'package:wanandroid_flutter/res/strings.dart';
+import 'package:wanandroid_flutter/util/string_util.dart';
 
 class ProjectPage extends StatefulWidget {
   const ProjectPage({super.key});
@@ -37,7 +34,7 @@ class _ProjectPageState extends BaseState<ProjectViewModel, ProjectPage> with Au
     return Scaffold(
       drawer: const DrawerScreen(),
       appBar: AppBar(
-        title: const Text(MStrings.commonText_5),
+        title: Text(StringUtil.get().commonText_5),
       ),
       body: PageStateProvider(
         viewModel: mViewModel,

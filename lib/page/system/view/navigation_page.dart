@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 import 'package:wanandroid_flutter/base/base_state.dart';
 import 'package:wanandroid_flutter/base/base_view_model.dart';
 import 'package:wanandroid_flutter/base/page_state_provider.dart';
@@ -12,7 +11,6 @@ import 'package:wanandroid_flutter/constant/router_constant.dart';
 import 'package:wanandroid_flutter/extension/router_helper.dart';
 import 'package:wanandroid_flutter/page/system/model/navigation_entity.dart';
 import 'package:wanandroid_flutter/page/system/viewmodel/system_view_model.dart';
-import 'package:wanandroid_flutter/res/colors.dart';
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({super.key});

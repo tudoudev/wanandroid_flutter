@@ -16,6 +16,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  # 国际化[localizations]
+  flutter_localizations:
+    sdk: flutter
   cupertino_icons: ^1.0.6
 
   # 路由[https://pub.dev/packages/go_router]
@@ -48,6 +51,8 @@ dependencies:
   cached_network_image: ^3.3.1
   # webview[https://pub.dev/packages/webview_flutter]
   webview_flutter: ^4.7.0
+  # 轻量级数据存储 [https://pub.dev/packages/shared_preferences]
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:
@@ -62,4 +67,9 @@ flutter:
   uses-material-design: true
   assets:
     - lib/res/images/
+  # 国际化[添加代码生成（合成包）支持]
+  generate: true
 
+# 国际化[intl]
+flutter_intl:
+  enabled: true

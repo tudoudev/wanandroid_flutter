@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wanandroid_flutter/extension/double_helper.dart';
 import 'package:wanandroid_flutter/res/colors.dart';
-import 'package:wanandroid_flutter/res/strings.dart';
 import 'package:wanandroid_flutter/util/common_util.dart';
+import 'package:wanandroid_flutter/util/string_util.dart';
 
 // 侧滑页面
 class DrawerScreen extends StatefulWidget {
@@ -42,16 +42,16 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   radius: 40.w,
                 ),
                 10.w.hGap,
-                Text(MStrings.main_1, style: TextStyle(fontSize: 18.w, color: MColors.white)),
+                Text(StringUtil.get().main_1, style: TextStyle(fontSize: 18.w, color: MColors.white)),
                 5.w.hGap,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(MStrings.main_2, style: TextStyle(fontSize: 11.sp, color: MColors.gray_f5), textAlign: TextAlign.center),
-                    Text(MStrings.commonNoData, style: TextStyle(fontSize: 11.sp, color: MColors.gray_f5), textAlign: TextAlign.center),
+                    Text(StringUtil.get().main_2, style: TextStyle(fontSize: 11.sp, color: MColors.gray_f5), textAlign: TextAlign.center),
+                    Text(StringUtil.get().commonNoData, style: TextStyle(fontSize: 11.sp, color: MColors.gray_f5), textAlign: TextAlign.center),
                     5.w.wGap,
-                    Text(MStrings.main_3, style: TextStyle(fontSize: 11.sp, color: MColors.gray_f5), textAlign: TextAlign.center),
-                    Text(MStrings.commonNoData, style: TextStyle(fontSize: 11.sp, color: MColors.gray_f5), textAlign: TextAlign.center),
+                    Text(StringUtil.get().main_3, style: TextStyle(fontSize: 11.sp, color: MColors.gray_f5), textAlign: TextAlign.center),
+                    Text(StringUtil.get().commonNoData, style: TextStyle(fontSize: 11.sp, color: MColors.gray_f5), textAlign: TextAlign.center),
                   ],
                 )
               ],
@@ -59,7 +59,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
           ),
           ListTile(
             title: Text(
-              MStrings.main_4,
+              StringUtil.get().main_4,
               style: TextStyle(fontSize: 14.sp),
             ),
             leading: Image.asset(
@@ -71,14 +71,14 @@ class _DrawerScreenState extends State<DrawerScreen> {
           ),
           ListTile(
             title: Text(
-              MStrings.main_5,
+              StringUtil.get().main_5,
               style: TextStyle(fontSize: 14.sp),
             ),
             leading: Icon(Icons.favorite_border, size: 22.w, color: Theme.of(context).primaryColor),
           ),
           ListTile(
             title: Text(
-              MStrings.main_6,
+              StringUtil.get().main_6,
               style: TextStyle(fontSize: 14.sp),
             ),
             leading: Image.asset(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 import 'package:wanandroid_flutter/base/base_state.dart';
 import 'package:wanandroid_flutter/base/base_view_model.dart';
 import 'package:wanandroid_flutter/base/page_state_provider.dart';
@@ -10,8 +9,7 @@ import 'package:wanandroid_flutter/page/home/model/article_entity.dart';
 import 'package:wanandroid_flutter/page/home/widget/article_widget.dart';
 import 'package:wanandroid_flutter/page/main/view/drawer_page.dart';
 import 'package:wanandroid_flutter/page/square/viewmodel/square_view_model.dart';
-import 'package:wanandroid_flutter/res/colors.dart';
-import 'package:wanandroid_flutter/res/strings.dart';
+import 'package:wanandroid_flutter/util/string_util.dart';
 
 /*
  * Description：<广场>
@@ -56,7 +54,7 @@ class _SquarePageState extends BaseState<SquareViewModel, SquarePage> with Autom
     return Scaffold(
       drawer: const DrawerScreen(),
       appBar: AppBar(
-        title: const Text(MStrings.commonText_2),
+        title: Text(StringUtil.get().commonText_2),
       ),
       body: PageStateProvider(
         viewModel: mViewModel,

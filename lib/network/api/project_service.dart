@@ -2,8 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 import 'package:wanandroid_flutter/base/base_entity.dart';
 import 'package:wanandroid_flutter/network/http_url_contant.dart';
-import 'package:wanandroid_flutter/page/home/model/article_entity.dart';
-import 'package:wanandroid_flutter/page/home/model/banner_entity.dart';
 import 'package:wanandroid_flutter/page/wxchat/model/chapters_entity.dart';
 
 part 'project_service.g.dart';

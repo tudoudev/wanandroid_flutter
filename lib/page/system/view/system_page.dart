@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:wanandroid_flutter/page/main/view/drawer_page.dart';
 import 'package:wanandroid_flutter/page/system/view/knowledge_tree_page.dart';
 import 'package:wanandroid_flutter/page/system/view/navigation_page.dart';
-import 'package:wanandroid_flutter/res/strings.dart';
+import 'package:wanandroid_flutter/util/string_util.dart';
 
 class SystemPage extends StatefulWidget {
   const SystemPage({super.key});
@@ -17,7 +17,7 @@ class SystemPage extends StatefulWidget {
 }
 
 class _SystemPageState extends State<SystemPage> with AutomaticKeepAliveClientMixin, TickerProviderStateMixin {
-  final _list = [MStrings.commonText_4, MStrings.commonText_6];
+  final _list = [StringUtil.get().commonText_4, StringUtil.get().commonText_6];
   late TabController _tabController;
 
   @override
@@ -32,7 +32,7 @@ class _SystemPageState extends State<SystemPage> with AutomaticKeepAliveClientMi
     return Scaffold(
       drawer: const DrawerScreen(),
       appBar: AppBar(
-        title: const Text(MStrings.commonText_4),
+        title: Text(StringUtil.get().commonText_4),
       ),
       body: Column(
         children: [

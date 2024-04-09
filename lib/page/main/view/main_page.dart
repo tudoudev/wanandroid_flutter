@@ -8,7 +8,7 @@ import 'package:wanandroid_flutter/page/project/view/project_page.dart';
 import 'package:wanandroid_flutter/page/square/view/square_page.dart';
 import 'package:wanandroid_flutter/page/system/view/system_page.dart';
 import 'package:wanandroid_flutter/page/wxchat/view/wxchat_page.dart';
-import 'package:wanandroid_flutter/res/strings.dart';
+import 'package:wanandroid_flutter/util/string_util.dart';
 
 /*
  * Description：<main>
@@ -51,26 +51,26 @@ class _MainPageState extends BaseState<MainViewModel, MainPage> {
             bottomNavigationBar: BottomNavigationBar(
               //显示模式
               type: BottomNavigationBarType.fixed,
-              items: const [
+              items: [
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: MStrings.commonText_1,
+                  icon: const Icon(Icons.home),
+                  label: StringUtil.get().commonText_1,
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.sports_gymnastics),
-                  label: MStrings.commonText_2,
+                  icon: const Icon(Icons.sports_gymnastics),
+                  label: StringUtil.get().commonText_2,
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.wechat),
-                  label: MStrings.commonText_3,
+                  icon: const Icon(Icons.wechat),
+                  label: StringUtil.get().commonText_3,
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.sports_volleyball),
-                  label: MStrings.commonText_4,
+                  icon: const Icon(Icons.sports_volleyball),
+                  label: StringUtil.get().commonText_4,
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.apps),
-                  label: MStrings.commonText_5,
+                  icon: const Icon(Icons.apps),
+                  label: StringUtil.get().commonText_5,
                 )
               ],
               //当前选中下标

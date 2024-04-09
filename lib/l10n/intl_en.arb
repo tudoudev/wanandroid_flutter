@@ -1,0 +1,33 @@
+{
+  "appName": "wanandroid",
+
+  "commonDragText": "上拉加载",
+  "commonExit": "再次点击退出应用",
+  "commonFailedText": "失败了",
+  "commonLoadingFailed": "加载失败，点击重试",
+  "commonLoadingNoNetWork": "网络失联了…\\n请联网后点击重试",
+
+  "commonNoData": "--",
+  "commonNoMoreText": "没有更多数据了",
+  "commonNoNetWork": "网络无连接,请检查网络",
+  "commonOnFailure": "服务器繁忙，请稍后再试",
+  "commonProcessedText": "成功了",
+  "commonReadyText": "加载中...",
+
+  "commonText_1": "首页",
+  "commonText_2": "广场",
+  "commonText_3": "公众号",
+  "commonText_4": "体系",
+  "commonText_5": "项目",
+  "commonText_6": "导航",
+
+  "homeText_1": "置顶",
+  "homeText_2": "新",
+
+  "main_1": "去登录",
+  "main_2": "等级:",
+  "main_3": "排名:",
+  "main_4": "我的积分",
+  "main_5": "我的收藏",
+  "main_6": "我的分享"
+}

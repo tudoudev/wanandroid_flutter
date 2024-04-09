@@ -3,12 +3,11 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:injectable/injectable.dart';
-import 'package:wanandroid_flutter/injector/injector.dart';
 import 'package:wanandroid_flutter/network/api/home_service.dart';
-import 'package:wanandroid_flutter/network/api/wx_chat_service.dart';
 import 'package:wanandroid_flutter/network/api/project_service.dart';
 import 'package:wanandroid_flutter/network/api/square_service.dart';
 import 'package:wanandroid_flutter/network/api/system_service.dart';
+import 'package:wanandroid_flutter/network/api/wx_chat_service.dart';
 import 'package:wanandroid_flutter/network/http_url_contant.dart';
 
 @module

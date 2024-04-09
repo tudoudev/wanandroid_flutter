@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wanandroid_flutter/base/base_view_model.dart';
-import 'package:wanandroid_flutter/base/selector_widget.dart';
-import 'package:wanandroid_flutter/page/home/viewmodel/home_view_model.dart';
-import 'package:wanandroid_flutter/page/main/viewmodel/main_view_model.dart';
 
 class SelectorWidget<A, S> extends StatefulWidget {
   final Widget Function(BuildContext context, S value, Widget? child) builder;

@@ -4,7 +4,7 @@ import 'package:wanandroid_flutter/constant/router_constant.dart';
 import 'package:wanandroid_flutter/extension/router_helper.dart';
 import 'package:wanandroid_flutter/page/home/model/article_entity.dart';
 import 'package:wanandroid_flutter/res/colors.dart';
-import 'package:wanandroid_flutter/res/strings.dart';
+import 'package:wanandroid_flutter/util/string_util.dart';
 
 class ArticleWidget extends StatelessWidget {
   ArticleEntity item;
@@ -33,7 +33,7 @@ class ArticleWidget extends StatelessWidget {
                       ),
                       padding: EdgeInsets.fromLTRB(4.w, 2.w, 4.w, 2.w),
                       margin: EdgeInsets.fromLTRB(0, 0, 4.w, 0),
-                      child: Text(MStrings.homeText_1, style: TextStyle(fontSize: 10.sp, color: MColors.c_f44336)),
+                      child: Text(StringUtil.get().homeText_1, style: TextStyle(fontSize: 10.sp, color: MColors.c_f44336)),
                     )),
                 Visibility(
                     visible: item.fresh,
@@ -44,7 +44,7 @@ class ArticleWidget extends StatelessWidget {
                       ),
                       padding: EdgeInsets.fromLTRB(4.w, 2.w, 4.w, 2.w),
                       margin: EdgeInsets.fromLTRB(0, 0, 4.w, 0),
-                      child: Text(MStrings.homeText_2, style: TextStyle(fontSize: 10.sp, color: MColors.c_f44336)),
+                      child: Text(StringUtil.get().homeText_2, style: TextStyle(fontSize: 10.sp, color: MColors.c_f44336)),
                     )),
                 Visibility(
                     visible: item.tags.isNotEmpty,

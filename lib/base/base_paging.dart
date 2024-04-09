@@ -5,9 +5,7 @@
  * Time：2024/3/11  17:09
  */
 
-import 'package:wanandroid_flutter/generated/json/base/json_convert_content.dart';
-import 'package:wanandroid_flutter/page/home/model/article_entity.dart';
-import 'package:wanandroid_flutter/page/home/model/banner_entity.dart';
+
 
 /*
  * Description：<网络请求响应解析的基类>

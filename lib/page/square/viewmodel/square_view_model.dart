@@ -1,12 +1,9 @@
 import 'package:injectable/injectable.dart';
 import 'package:wanandroid_flutter/base/base_view_model.dart';
 import 'package:wanandroid_flutter/base/selector_widget.dart';
-import 'package:wanandroid_flutter/constant/common_constant.dart';
 import 'package:wanandroid_flutter/injector/injector.dart';
-import 'package:wanandroid_flutter/network/api/home_service.dart';
 import 'package:wanandroid_flutter/network/api/square_service.dart';
 import 'package:wanandroid_flutter/page/home/model/article_entity.dart';
-import 'package:wanandroid_flutter/page/home/model/banner_entity.dart';
 
 @injectable
 class SquareViewModel extends BaseViewModel {

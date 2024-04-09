@@ -3,8 +3,6 @@ import 'package:wanandroid_flutter/base/base_view_model.dart';
 import 'package:wanandroid_flutter/base/selector_widget.dart';
 import 'package:wanandroid_flutter/injector/injector.dart';
 import 'package:wanandroid_flutter/network/api/project_service.dart';
-import 'package:wanandroid_flutter/network/api/system_service.dart';
-import 'package:wanandroid_flutter/page/system/model/navigation_entity.dart';
 import 'package:wanandroid_flutter/page/wxchat/model/chapters_entity.dart';
 
 @injectable

@@ -10,7 +10,8 @@ import 'package:wanandroid_flutter/page/home/model/banner_entity.dart';
 import 'package:wanandroid_flutter/page/home/viewmodel/home_view_model.dart';
 import 'package:wanandroid_flutter/page/home/widget/article_widget.dart';
 import 'package:wanandroid_flutter/page/main/view/drawer_page.dart';
-import 'package:wanandroid_flutter/res/strings.dart';
+import 'package:wanandroid_flutter/util/string_util.dart';
+
 
 /*
  * Description：<首页>
@@ -55,7 +56,7 @@ class _HomePageState extends BaseState<HomeViewModel, HomePage> with AutomaticKe
     return Scaffold(
       drawer: const DrawerScreen(),
       appBar: AppBar(
-        title: const Text(MStrings.commonText_1),
+        title: Text(StringUtil.get().commonText_1),
       ),
       body: PageStateProvider(
         viewModel: mViewModel,

@@ -1,14 +1,9 @@
 import 'package:flutter_gen/gen_l10n/l10n1.dart';
 import 'package:wanandroid_flutter/constant/common_constant.dart';
 
-class CommonUtil {
-  //拼接图片路径
-  static String getImgPath(String name, {String format = 'png'}) {
-    return 'lib/res/images/$name.$format';
-  }
-
+class StringUtil {
   //获取AppLocalizations
-  static AppLocalizations getString() {
+  static AppLocalizations get() {
     return AppLocalizations.of(CommonConstant.navKey.currentState!.context)!;
   }
 

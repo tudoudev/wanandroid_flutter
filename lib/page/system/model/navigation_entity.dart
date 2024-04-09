@@ -1,8 +1,9 @@
-import 'package:wanandroid_flutter/generated/json/base/json_field.dart';
-import 'package:wanandroid_flutter/generated/json/navigation_entity.g.dart';
 import 'dart:convert';
 
+import 'package:wanandroid_flutter/generated/json/base/json_field.dart';
+import 'package:wanandroid_flutter/generated/json/navigation_entity.g.dart';
 import 'package:wanandroid_flutter/page/home/model/article_entity.dart';
+
 export 'package:wanandroid_flutter/generated/json/navigation_entity.g.dart';
 
 @JsonSerializable()

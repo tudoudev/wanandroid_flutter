@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:wanandroid_flutter/base/base_view_model.dart';
 import 'package:wanandroid_flutter/base/selector_widget.dart';
 import 'package:wanandroid_flutter/res/colors.dart';
-import 'package:wanandroid_flutter/res/strings.dart';
 import 'package:wanandroid_flutter/util/common_util.dart';
+import 'package:wanandroid_flutter/util/string_util.dart';
 
 class PageStateProvider<T extends BaseViewModel> extends StatelessWidget {
   final T viewModel;
@@ -43,7 +43,7 @@ class PageStateProvider<T extends BaseViewModel> extends StatelessWidget {
                           CommonUtil.getImgPath("ui_loading_failed"),
                           width: 250.w,
                         ),
-                        const Text(MStrings.commonLoadingFailed)
+                        Text(StringUtil.get().commonLoadingFailed)
                       ],
                     ),
                   ),
@@ -65,7 +65,7 @@ class PageStateProvider<T extends BaseViewModel> extends StatelessWidget {
                           CommonUtil.getImgPath("ui_oading_no_network"),
                           width: 250.w,
                         ),
-                        const Text(MStrings.commonLoadingNoNetWork, textAlign: TextAlign.center)
+                        Text(StringUtil.get().commonLoadingNoNetWork, textAlign: TextAlign.center)
                       ],
                     ),
                   ),
