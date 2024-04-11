@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wanandroid_flutter/base/base_state.dart';
 import 'package:wanandroid_flutter/base/base_view_model.dart';
-import 'package:wanandroid_flutter/base/page_state_provider.dart';
-import 'package:wanandroid_flutter/base/refresh_widget.dart';
-import 'package:wanandroid_flutter/base/selector_widget.dart';
+import 'package:wanandroid_flutter/widget/page_state_provider.dart';
+import 'package:wanandroid_flutter/widget/refresh_widget.dart';
+import 'package:wanandroid_flutter/widget/selector_widget.dart';
 import 'package:wanandroid_flutter/constant/router_constant.dart';
 import 'package:wanandroid_flutter/extension/router_helper.dart';
 import 'package:wanandroid_flutter/page/home/model/article_entity.dart';
@@ -73,7 +73,7 @@ class _ArticlePageState extends BaseState<WxChatViewModel, ArticlePage> with Aut
                         var item = it.value![index];
                         return InkWell(
                           onTap: () {
-                            context.goto(RouterConstant.webView, extra: {'url': item.link, 'title': item.title});
+                            context.goto(RouterConstant.webViewPage, extra: {'url': item.link, 'title': item.title});
                           },
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

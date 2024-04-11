@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:wanandroid_flutter/base/base_view_model.dart';
-import 'package:wanandroid_flutter/base/selector_widget.dart';
+import 'package:wanandroid_flutter/widget/selector_widget.dart';
 import 'package:wanandroid_flutter/res/colors.dart';
 import 'package:wanandroid_flutter/util/common_util.dart';
 import 'package:wanandroid_flutter/util/string_util.dart';

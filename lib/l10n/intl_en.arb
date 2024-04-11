@@ -8,6 +8,8 @@
   "commonLoadingNoNetWork": "网络失联了…\\n请联网后点击重试",
 
   "commonNoData": "--",
+  "commonOk": "确定",
+  "commonCancel": "取消",
   "commonNoMoreText": "没有更多数据了",
   "commonNoNetWork": "网络无连接,请检查网络",
   "commonOnFailure": "服务器繁忙，请稍后再试",
@@ -29,5 +31,22 @@
   "main_3": "排名:",
   "main_4": "我的积分",
   "main_5": "我的收藏",
-  "main_6": "我的分享"
+  "main_6": "我的分享",
+  "main_7": "登录",
+  "main_8": "用户登录",
+  "main_9": "请使用WanAndroid账号登录",
+  "main_10": "用户名",
+  "main_11": "请输入用户名",
+  "main_12": "密码",
+  "main_13": "请输入密码",
+  "main_14": "还没有账号，注册一个？",
+  "main_15": "注册",
+  "main_16": "注册用户",
+  "main_17": "用户注册后才可以登录",
+  "main_18": "再次输入密码",
+  "main_19": "请再次输入密码",
+  "main_20": "注册成功",
+  "main_21": "登录成功",
+  "main_22": "退出登录",
+  "main_23": "确定退出登录吗?"
 }

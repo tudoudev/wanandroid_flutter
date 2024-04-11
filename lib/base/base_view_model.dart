@@ -1,15 +1,18 @@
 import 'dart:async';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:easy_refresh/easy_refresh.dart';
+import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:go_router/go_router.dart';
 import 'package:wanandroid_flutter/base/base_entity.dart';
-import 'package:wanandroid_flutter/base/selector_widget.dart';
+import 'package:wanandroid_flutter/widget/selector_widget.dart';
 import 'package:wanandroid_flutter/constant/common_constant.dart';
+import 'package:wanandroid_flutter/constant/router_constant.dart';
 import 'package:wanandroid_flutter/util/string_util.dart';
 
 class BaseViewModel extends ChangeNotifier {
+
   //页面请求状态
   var pageState = PageState.loading;
 
@@ -127,6 +130,10 @@ class BaseViewModel extends ChangeNotifier {
     //请求成功(code异常)
     if (e is ErrorException) {
       message = e.errorMsg;
+      //登录过期
+      if (e.errorCode == -1001) {
+        GoRouter.of(CommonConstant.navKey.currentState!.context).push(RouterConstant.loginPage);
+      }
     }
     //Http错误
     else {

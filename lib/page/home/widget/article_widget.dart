@@ -15,7 +15,7 @@ class ArticleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.goto(RouterConstant.webView, extra: {'url': item.link, 'title': item.title});
+        context.goto(RouterConstant.webViewPage, extra: {'url': item.link, 'title': item.title});
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

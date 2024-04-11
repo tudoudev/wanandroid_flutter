@@ -40,7 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "commonText_2": MessageLookupByLibrary.simpleMessage("广场"),
         "commonText_3": MessageLookupByLibrary.simpleMessage("公众号"),
         "commonText_4": MessageLookupByLibrary.simpleMessage("体系"),
-        "commonText_5": MessageLookupByLibrary.simpleMessage("项目"),
+        "commonText_6": MessageLookupByLibrary.simpleMessage("导航"),
         "homeText_1": MessageLookupByLibrary.simpleMessage("置顶"),
         "homeText_2": MessageLookupByLibrary.simpleMessage("新"),
         "main_1": MessageLookupByLibrary.simpleMessage("去登录"),

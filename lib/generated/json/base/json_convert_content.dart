@@ -6,6 +6,7 @@
 import 'package:flutter/material.dart' show debugPrint;
 import 'package:wanandroid_flutter/page/home/model/article_entity.dart';
 import 'package:wanandroid_flutter/page/home/model/banner_entity.dart';
+import 'package:wanandroid_flutter/page/main/model/user_info_entity.dart';
 import 'package:wanandroid_flutter/page/system/model/navigation_entity.dart';
 import 'package:wanandroid_flutter/page/wxchat/model/chapters_entity.dart';
 
@@ -144,6 +145,9 @@ class JsonConvert {
     if (<BannerEntity>[] is M) {
       return data.map<BannerEntity>((Map<String, dynamic> e) => BannerEntity.fromJson(e)).toList() as M;
     }
+    if (<UserInfoEntity>[] is M) {
+      return data.map<UserInfoEntity>((Map<String, dynamic> e) => UserInfoEntity.fromJson(e)).toList() as M;
+    }
     if (<NavigationEntity>[] is M) {
       return data.map<NavigationEntity>((Map<String, dynamic> e) => NavigationEntity.fromJson(e)).toList() as M;
     }
@@ -173,6 +177,7 @@ class JsonConvertClassCollection {
     (ArticleEntity).toString(): ArticleEntity.fromJson,
     (ArticleTags).toString(): ArticleTags.fromJson,
     (BannerEntity).toString(): BannerEntity.fromJson,
+    (UserInfoEntity).toString(): UserInfoEntity.fromJson,
     (NavigationEntity).toString(): NavigationEntity.fromJson,
     (ChaptersEntity).toString(): ChaptersEntity.fromJson,
   };

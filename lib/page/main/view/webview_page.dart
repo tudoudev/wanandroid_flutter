@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wanandroid_flutter/base/base_state.dart';
 import 'package:wanandroid_flutter/base/base_view_model.dart';
-import 'package:wanandroid_flutter/base/page_state_provider.dart';
+import 'package:wanandroid_flutter/widget/page_state_provider.dart';
 import 'package:wanandroid_flutter/page/main/viewmodel/webview_view_model.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 

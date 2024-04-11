@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:wanandroid_flutter/base/base_view_model.dart';
-import 'package:wanandroid_flutter/base/selector_widget.dart';
+import 'package:wanandroid_flutter/widget/selector_widget.dart';
 import 'package:wanandroid_flutter/injector/injector.dart';
 import 'package:wanandroid_flutter/network/api/system_service.dart';
 import 'package:wanandroid_flutter/page/system/model/navigation_entity.dart';

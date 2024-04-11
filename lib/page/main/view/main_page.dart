@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wanandroid_flutter/base/base_state.dart';
-import 'package:wanandroid_flutter/base/selector_widget.dart';
+import 'package:wanandroid_flutter/widget/selector_widget.dart';
 import 'package:wanandroid_flutter/page/home/view/home_page.dart';
 import 'package:wanandroid_flutter/page/main/viewmodel/main_view_model.dart';
 import 'package:wanandroid_flutter/page/project/view/project_page.dart';

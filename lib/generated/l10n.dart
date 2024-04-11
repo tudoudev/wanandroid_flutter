@@ -1,7 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import 'intl/messages_all.dart';
 
 // **************************************************************************
@@ -116,6 +115,26 @@ class S {
     return Intl.message(
       '--',
       name: 'commonNoData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `确定`
+  String get commonOk {
+    return Intl.message(
+      '确定',
+      name: 'commonOk',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `取消`
+  String get commonCancel {
+    return Intl.message(
+      '取消',
+      name: 'commonCancel',
       desc: '',
       args: [],
     );
@@ -306,6 +325,176 @@ class S {
     return Intl.message(
       '我的分享',
       name: 'main_6',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `登录`
+  String get main_7 {
+    return Intl.message(
+      '登录',
+      name: 'main_7',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `用户登录`
+  String get main_8 {
+    return Intl.message(
+      '用户登录',
+      name: 'main_8',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `请使用WanAndroid账号登录`
+  String get main_9 {
+    return Intl.message(
+      '请使用WanAndroid账号登录',
+      name: 'main_9',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `用户名`
+  String get main_10 {
+    return Intl.message(
+      '用户名',
+      name: 'main_10',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `请输入用户名`
+  String get main_11 {
+    return Intl.message(
+      '请输入用户名',
+      name: 'main_11',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `密码`
+  String get main_12 {
+    return Intl.message(
+      '密码',
+      name: 'main_12',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `请输入密码`
+  String get main_13 {
+    return Intl.message(
+      '请输入密码',
+      name: 'main_13',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `还没有账号，注册一个？`
+  String get main_14 {
+    return Intl.message(
+      '还没有账号，注册一个？',
+      name: 'main_14',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `注册`
+  String get main_15 {
+    return Intl.message(
+      '注册',
+      name: 'main_15',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `注册用户`
+  String get main_16 {
+    return Intl.message(
+      '注册用户',
+      name: 'main_16',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `用户注册后才可以登录`
+  String get main_17 {
+    return Intl.message(
+      '用户注册后才可以登录',
+      name: 'main_17',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `再次输入密码`
+  String get main_18 {
+    return Intl.message(
+      '再次输入密码',
+      name: 'main_18',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `请再次输入密码`
+  String get main_19 {
+    return Intl.message(
+      '请再次输入密码',
+      name: 'main_19',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `注册成功`
+  String get main_20 {
+    return Intl.message(
+      '注册成功',
+      name: 'main_20',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `登录成功`
+  String get main_21 {
+    return Intl.message(
+      '登录成功',
+      name: 'main_21',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `退出登录`
+  String get main_22 {
+    return Intl.message(
+      '退出登录',
+      name: 'main_22',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `确定退出登录吗?`
+  String get main_23 {
+    return Intl.message(
+      '确定退出登录吗?',
+      name: 'main_23',
       desc: '',
       args: [],
     );

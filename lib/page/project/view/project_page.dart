@@ -5,7 +5,7 @@
  */
 import 'package:flutter/material.dart';
 import 'package:wanandroid_flutter/base/base_state.dart';
-import 'package:wanandroid_flutter/base/page_state_provider.dart';
+import 'package:wanandroid_flutter/widget/page_state_provider.dart';
 import 'package:wanandroid_flutter/page/main/view/drawer_page.dart';
 import 'package:wanandroid_flutter/page/project/view/project_article_page.dart';
 import 'package:wanandroid_flutter/page/project/viewmodel/project_view_model.dart';

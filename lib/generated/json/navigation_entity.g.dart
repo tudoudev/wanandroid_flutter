@@ -1,6 +1,6 @@
 import 'package:wanandroid_flutter/generated/json/base/json_convert_content.dart';
-import 'package:wanandroid_flutter/page/home/model/article_entity.dart';
 import 'package:wanandroid_flutter/page/system/model/navigation_entity.dart';
+import 'package:wanandroid_flutter/page/home/model/article_entity.dart';
 
 
 NavigationEntity $NavigationEntityFromJson(Map<String, dynamic> json) {
