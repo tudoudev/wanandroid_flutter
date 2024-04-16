@@ -23,8 +23,6 @@ void main() async {
   //初始化拦截器
   initDio();
 
-  Future.delayed(const Duration(seconds: 2));
-
   runApp(const MyApp());
 
   // if (Platform.isAndroid) {
