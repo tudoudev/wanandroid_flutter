@@ -5,6 +5,14 @@
         <!-- Show a splash screen on the activity. Automatically removed when
              the Flutter engine draws its first frame -->
         <item name="android:windowBackground">@drawable/launch_background</item>
+        <!--适配刘海屏、异形屏-->
+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+        <!--全屏-->
+        <item name="android:windowFullscreen">true</item>
+        <!--导航栏是否半透明-->
+        <item name="android:windowTranslucentNavigation">true</item>
+        <!--状态栏是否半透明-->
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
     <!-- Theme applied to the Android Window as soon as the process has started.
          This theme determines the color of the Android Window while your
