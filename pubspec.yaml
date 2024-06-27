@@ -38,7 +38,7 @@ dependencies:
   # 结合dio实现网络请求，编译时生成网络请求的代码[https://pub.dev/packages/retrofit]
   retrofit: ^4.1.0
   # 下拉刷新[https://pub.dev/packages/easy_refresh]
-  easy_refresh: ^3.3.4
+  easy_refresh: ^3.4.0
   # 加载框、toast[https://pub.dev/packages/flutter_easyloading]
   flutter_easyloading: ^3.0.5
   # 加载动画[https://pub.dev/packages/flutter_spinkit]
@@ -47,7 +47,7 @@ dependencies:
   connectivity_plus: ^6.0.1
   # 屏幕适配[https://pub.dev/packages/flutter_screenutil]
   flutter_screenutil: ^5.9.0
-  # 图片缓存[https://github.com/renefloor/flutter_cached_network_image]
+  # 图片缓存[https://pub.dev/packages/cached_network_image]
   cached_network_image: ^3.3.1
   # webview[https://pub.dev/packages/webview_flutter]
   webview_flutter: ^4.7.0
