@@ -1,19 +1,4 @@
 /*
- * Description：<网络请求响应解析的基类>
- * 这里T为泛型
- * Created by：zzl
- * Time：2024/3/11  17:09
- */
-
-
-
-/*
- * Description：<网络请求响应解析的基类>
- * 这里T为泛型
- * Created by：zzl
- * Time：2024/3/15  9:53 AM
- */
-/*
  * Description：<网络请求响应解析的基类-paging分页>
  * Created by：zzl
  * Time：2024/3/15  9:53 AM
