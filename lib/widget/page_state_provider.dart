@@ -24,7 +24,7 @@ class PageStateProvider<T extends BaseViewModel> extends StatelessWidget {
         selector: (context, _) => viewModel.pageState,
         builder: (context, it, child) {
           switch (it) {
-            //加载成功
+            //加载中
             case PageState.loading:
               return SpinKitCircle(color: MColors.appMain, size: 50.w);
             //加载失败

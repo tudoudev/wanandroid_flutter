@@ -56,6 +56,10 @@ class MyApp extends StatelessWidget {
                   return AppLocalizations.of(context)!.appName;
                 },
                 theme: ThemeData(
+                    // 全局移除水波纹效果
+                    splashFactory: NoSplash.splashFactory,
+                    // 全局移除点击高亮效果
+                    highlightColor: Colors.transparent,
                     //应用程序主要部分的背景颜色(toolbars、tab bars 等)
                     primaryColor: MColors.appMain,
                     //Tab指示器颜色
