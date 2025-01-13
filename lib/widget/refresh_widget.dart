@@ -18,15 +18,15 @@ class RefreshWidget extends StatelessWidget {
       onRefresh: onRefresh == null
           ? null
           : () async {
-              viewModel.requestNum = CommonConstant.initialPageNum;
-              await onRefresh!();
-            },
+        viewModel.requestNum = CommonConstant.initialPageNum;
+        await onRefresh!();
+      },
       onLoad: onLoad == null
           ? null
           : () async {
-              viewModel.requestNum++;
-              await onLoad!();
-            },
+        viewModel.requestNum++;
+        await onLoad!();
+      },
       child: child,
     );
   }

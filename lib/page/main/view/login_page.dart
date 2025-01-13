@@ -1,19 +1,20 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wanandroid_flutter/base/base_state.dart';
 import 'package:wanandroid_flutter/base/init_config.dart';
 import 'package:wanandroid_flutter/constant/bus_code.dart';
 import 'package:wanandroid_flutter/constant/router_constant.dart';
 import 'package:wanandroid_flutter/extension/double_helper.dart';
-import 'package:wanandroid_flutter/extension/router_helper.dart';
 import 'package:wanandroid_flutter/page/main/viewmodel/login_view_model.dart';
-import 'package:wanandroid_flutter/res/colors.dart';
-import 'package:wanandroid_flutter/util/string_util.dart';
+import 'package:wanandroid_flutter/res/m_colors.dart';
 
-class LoginPage extends StatefulWidget {
+import '../../../base/app_router.dart';
+import '../../../res/m_string.dart';
+
+class LoginPage extends StatefulHookWidget {
   const LoginPage({super.key});
 
   @override
@@ -23,8 +24,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends BaseState<LoginViewModel, LoginPage> {
-  final TextEditingController _userNameController = TextEditingController();
-  final TextEditingController _psdController = TextEditingController();
+  late TextEditingController _userNameController;
+
+  late TextEditingController _psdController;
 
   @override
   void initState() {
@@ -32,56 +34,58 @@ class _LoginPageState extends BaseState<LoginViewModel, LoginPage> {
     //登录状态
     eventBus.on<LoginStateBus>().listen((event) {
       context.pop();
-      EasyLoading.showToast(StringUtil.get().main_21);
+      EasyLoading.showToast(MString.commonText_29);
     });
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget initView(BuildContext context) {
+    _userNameController = useTextEditingController();
+    _psdController = useTextEditingController();
     return Scaffold(
       appBar: AppBar(
-        title: Text(StringUtil.get().main_7),
+        title: const Text(MString.commonText_15),
         leading: IconButton(icon: const Icon(Icons.arrow_back_ios), onPressed: () => context.pop()),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.w),
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            20.w.hGap,
+            20.hGap,
             Container(
               alignment: Alignment.centerLeft,
-              child: Text(StringUtil.get().main_8, style: TextStyle(fontSize: 16.sp)),
+              child: const Text(MString.commonText_16, style: TextStyle(fontSize: 16)),
             ),
             Container(
-              padding: EdgeInsets.only(top: 10.w),
+              padding: const EdgeInsets.only(top: 10),
               alignment: Alignment.centerLeft,
-              child: Text(StringUtil.get().main_9, style: TextStyle(fontSize: 12.sp, color: MColors.gray_99)),
+              child: const Text(MString.commonText_17, style: TextStyle(fontSize: 12, color: MColors.gray_99)),
             ),
             TextField(
               autofocus: false,
               controller: _userNameController,
-              decoration: InputDecoration(
-                labelText: StringUtil.get().main_10,
-                hintText: StringUtil.get().main_11,
-                labelStyle: const TextStyle(color: Colors.cyan),
+              decoration: const InputDecoration(
+                labelText: MString.commonText_18,
+                hintText: MString.commonText_19,
+                labelStyle: TextStyle(color: Colors.cyan),
               ),
               maxLines: 1,
               onTapOutside: (event) => FocusScope.of(context).unfocus(),
             ),
             TextField(
               controller: _psdController,
-              decoration: InputDecoration(
-                labelText: StringUtil.get().main_12,
-                hintText: StringUtil.get().main_13,
-                labelStyle: const TextStyle(color: Colors.cyan),
+              decoration: const InputDecoration(
+                labelText: MString.commonText_20,
+                hintText: MString.commonText_21,
+                labelStyle: TextStyle(color: Colors.cyan),
               ),
               obscureText: true,
               maxLines: 1,
               onTapOutside: (event) => FocusScope.of(context).unfocus(),
             ),
-            30.w.hGap,
+            30.hGap,
             SizedBox(
-              height: 50.w,
+              height: 50,
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
@@ -93,17 +97,17 @@ class _LoginPageState extends BaseState<LoginViewModel, LoginPage> {
                   });
                   mViewModel.login(map);
                 },
-                child: Text(StringUtil.get().main_7),
+                child: const Text(MString.commonText_15),
               ),
             ),
-            10.w.hGap,
+            10.hGap,
             Container(
               alignment: Alignment.centerRight,
               child: TextButton(
-                onPressed: () => context.goto(RouterConstant.registerPage),
-                child: Text(
-                  StringUtil.get().main_14,
-                  style: const TextStyle(color: MColors.appMain),
+                onPressed: () => goto(RouterConstant.RegisterPage),
+                child: const Text(
+                  MString.commonText_22,
+                  style: TextStyle(color: MColors.appMain),
                 ),
               ),
             )

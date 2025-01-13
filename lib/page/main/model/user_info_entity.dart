@@ -5,28 +5,27 @@ export 'package:wanandroid_flutter/generated/json/user_info_entity.g.dart';
 
 @JsonSerializable()
 class UserInfoEntity {
-	late bool admin = false;
-	late List<dynamic> chapterTops = [];
-	late int coinCount = 0;
-	late List<dynamic> collectIds = [];
-	late String email = '';
-	late String icon = '';
-	late int id = 0;
-	late String nickname = '';
-	late String password = '';
-	late String publicName = '';
-	late String token = '';
-	late int type = 0;
-	late String username = '';
+  late bool admin = false;
+  late int coinCount = 0;
+  late String email = '';
+  late String icon = '';
+  late int id = 0;
+  late String nickname = '';
+  late String password = '';
+  late String publicName = '';
+  late String token = '';
+  late int type = 0;
+  late String username = '';
+  late bool isLogin = false;
 
-	UserInfoEntity();
+  UserInfoEntity();
 
-	factory UserInfoEntity.fromJson(Map<String, dynamic> json) => $UserInfoEntityFromJson(json);
+  factory UserInfoEntity.fromJson(Map<String, dynamic> json) => $UserInfoEntityFromJson(json);
 
-	Map<String, dynamic> toJson() => $UserInfoEntityToJson(this);
+  Map<String, dynamic> toJson() => $UserInfoEntityToJson(this);
 
-	@override
-	String toString() {
-		return jsonEncode(this);
-	}
+  @override
+  String toString() {
+    return jsonEncode(this);
+  }
 }

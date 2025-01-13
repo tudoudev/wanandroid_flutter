@@ -10,7 +10,7 @@ class ProjectViewModel extends BaseViewModel {
   var chaptersEntityList = SelectorData<List<ChaptersEntity>>(value: []);
 
   //项目分类
-  Future initView() async {
+  Future initHttp() async {
     await request(requestType: RequestType.page, () async {
       await handle(
         () => getIt<ProjectService>().projectTreeJson(),

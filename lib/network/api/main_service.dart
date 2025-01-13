@@ -6,6 +6,8 @@ import 'package:wanandroid_flutter/page/home/model/article_entity.dart';
 import 'package:wanandroid_flutter/page/home/model/banner_entity.dart';
 import 'package:wanandroid_flutter/page/main/model/user_info_entity.dart';
 
+import '../../page/home/model/integrate_entity.dart';
+
 part 'main_service.g.dart';
 
 @RestApi(baseUrl: HttpUrlContant.baseUrl)
@@ -13,11 +15,20 @@ abstract class MainService {
   factory MainService(Dio dio) = _MainService;
 
   @GET(HttpUrlContant.lgCoinList)
-  Future<BaseEntity<PagingEntity<ArticleEntity>>> lgCoinList(@Path("pageNum") int pageNum);
+  Future<BaseEntity<PagingEntity<IntegrateEntity>>> lgCoinList(@Path("pageNum") int pageNum);
 
   @POST(HttpUrlContant.login)
   Future<BaseEntity<UserInfoEntity>> login(@Body() FormData map);
 
   @POST(HttpUrlContant.register)
   Future<BaseEntity<dynamic>> register(@Body() FormData map);
+
+  @POST(HttpUrlContant.collect)
+  Future<BaseEntity<dynamic>> collect(@Path("id") int id);
+
+  @POST(HttpUrlContant.uncollect)
+  Future<BaseEntity<dynamic>> uncollect(@Path("id") int id);
+
+  @GET(HttpUrlContant.collectList)
+  Future<BaseEntity<PagingEntity<ArticleEntity>>> collectList(@Path("pageNum") int pageNum);
 }

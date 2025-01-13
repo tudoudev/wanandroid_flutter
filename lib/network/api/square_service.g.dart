@@ -6,7 +6,7 @@ part of 'square_service.dart';
 // RetrofitGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
+// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element
 
 class _SquareService implements SquareService {
   _SquareService(
@@ -44,9 +44,9 @@ class _SquareService implements SquareService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value =
+    final _value =
         BaseEntity<PagingEntity<ArticleEntity>>.fromJson(_result.data!);
-    return value;
+    return _value;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

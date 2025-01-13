@@ -1,6 +1,0 @@
-arb-dir: lib/l10n
-template-arb-file: intl_en.arb
-output-localization-file: l10n1.dart
-#output-class: DeerLocalizations
-#use-deferred-loading: false
-

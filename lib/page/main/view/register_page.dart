@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wanandroid_flutter/base/base_state.dart';
 import 'package:wanandroid_flutter/extension/double_helper.dart';
 import 'package:wanandroid_flutter/page/main/viewmodel/register_view_model.dart';
-import 'package:wanandroid_flutter/res/colors.dart';
-import 'package:wanandroid_flutter/util/string_util.dart';
+import 'package:wanandroid_flutter/res/m_colors.dart';
+
+import '../../../res/m_string.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -32,43 +32,43 @@ class _RegisterPageState extends BaseState<RegisterViewModel, RegisterPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget initView(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(StringUtil.get().main_15),
+        title: const Text(MString.commonText_23),
         leading: IconButton(icon: const Icon(Icons.arrow_back_ios), onPressed: () => context.pop()),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.w),
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            20.w.hGap,
+            20.hGap,
             Container(
               alignment: Alignment.centerLeft,
-              child: Text(StringUtil.get().main_16, style: TextStyle(fontSize: 16.sp)),
+              child: const Text(MString.commonText_24, style: TextStyle(fontSize: 16)),
             ),
             Container(
-              padding: EdgeInsets.only(top: 10.w),
+              padding: const EdgeInsets.only(top: 10),
               alignment: Alignment.centerLeft,
-              child: Text(StringUtil.get().main_17, style: TextStyle(fontSize: 12.sp, color: MColors.gray_99)),
+              child: const Text(MString.commonText_25, style: TextStyle(fontSize: 12, color: MColors.gray_99)),
             ),
             TextField(
               autofocus: false,
               controller: _userNameController,
-              decoration: InputDecoration(
-                labelText: StringUtil.get().main_10,
-                hintText: StringUtil.get().main_11,
-                labelStyle: const TextStyle(color: Colors.cyan),
+              decoration: const InputDecoration(
+                labelText: MString.commonText_18,
+                hintText: MString.commonText_19,
+                labelStyle: TextStyle(color: Colors.cyan),
               ),
               maxLines: 1,
               onTapOutside: (event) => FocusScope.of(context).unfocus(),
             ),
             TextField(
               controller: _psdController,
-              decoration: InputDecoration(
-                labelText: StringUtil.get().main_12,
-                hintText: StringUtil.get().main_13,
-                labelStyle: const TextStyle(color: Colors.cyan),
+              decoration: const InputDecoration(
+                labelText: MString.commonText_20,
+                hintText: MString.commonText_21,
+                labelStyle: TextStyle(color: Colors.cyan),
               ),
               obscureText: true,
               maxLines: 1,
@@ -76,18 +76,18 @@ class _RegisterPageState extends BaseState<RegisterViewModel, RegisterPage> {
             ),
             TextField(
               controller: _psdAgainController,
-              decoration: InputDecoration(
-                labelText: StringUtil.get().main_18,
-                hintText: StringUtil.get().main_19,
-                labelStyle: const TextStyle(color: Colors.cyan),
+              decoration: const InputDecoration(
+                labelText: MString.commonText_26,
+                hintText: MString.commonText_27,
+                labelStyle: TextStyle(color: Colors.cyan),
               ),
               obscureText: true,
               maxLines: 1,
               onTapOutside: (event) => FocusScope.of(context).unfocus(),
             ),
-            30.w.hGap,
+            30.hGap,
             SizedBox(
-              height: 50.w,
+              height: 50,
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
@@ -101,7 +101,7 @@ class _RegisterPageState extends BaseState<RegisterViewModel, RegisterPage> {
                   });
                   mViewModel.register(map);
                 },
-                child: Text(StringUtil.get().main_15),
+                child: const Text(MString.commonText_23),
               ),
             ),
           ],

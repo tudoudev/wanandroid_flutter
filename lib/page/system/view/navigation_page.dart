@@ -1,26 +1,26 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:wanandroid_flutter/base/app_router.dart';
 import 'package:wanandroid_flutter/base/base_state.dart';
 import 'package:wanandroid_flutter/base/base_view_model.dart';
 import 'package:wanandroid_flutter/widget/page_state_provider.dart';
 import 'package:wanandroid_flutter/widget/refresh_widget.dart';
 import 'package:wanandroid_flutter/widget/selector_widget.dart';
 import 'package:wanandroid_flutter/constant/router_constant.dart';
-import 'package:wanandroid_flutter/extension/router_helper.dart';
 import 'package:wanandroid_flutter/page/system/model/navigation_entity.dart';
 import 'package:wanandroid_flutter/page/system/viewmodel/system_view_model.dart';
 
-class NavigationPage extends StatefulWidget {
+class NavigationPage extends StatefulHookWidget {
   const NavigationPage({super.key});
 
   @override
   State<NavigationPage> createState() => _NavigationPageState();
 }
 
-class _NavigationPageState extends BaseState<SystemViewModel, NavigationPage> with AutomaticKeepAliveClientMixin {
-  final ScrollController _scrollController = ScrollController();
+class _NavigationPageState extends BaseState<SystemViewModel, NavigationPage> {
+  late ScrollController _scrollController;
 
   // 是否显示悬浮按钮
   bool _isShowFAB = false;
@@ -30,23 +30,28 @@ class _NavigationPageState extends BaseState<SystemViewModel, NavigationPage> wi
     super.initState();
     //初始化view
     mViewModel.naviJson(RequestType.page);
-    //listview滚动监听
-    _scrollController.addListener(() {
-      if (_scrollController.offset < 200 && _isShowFAB) {
-        setState(() {
-          _isShowFAB = false;
-        });
-      } else if (_scrollController.offset >= 200 && !_isShowFAB) {
-        setState(() {
-          _isShowFAB = true;
-        });
-      }
-    });
   }
 
   @override
-  Widget build(BuildContext context) {
-    super.build(context);
+  Widget initView(BuildContext context) {
+    _scrollController = useScrollController();
+    //listview滚动监听
+    useEffect(() {
+      temp() {
+        if (_scrollController.offset < 200 && _isShowFAB) {
+          setState(() {
+            _isShowFAB = false;
+          });
+        } else if (_scrollController.offset >= 200 && !_isShowFAB) {
+          setState(() {
+            _isShowFAB = true;
+          });
+        }
+      }
+
+      _scrollController.addListener(temp);
+      return () => _scrollController.removeListener(temp);
+    }, []);
     return Scaffold(
       body: PageStateProvider(
         viewModel: mViewModel,
@@ -62,42 +67,42 @@ class _NavigationPageState extends BaseState<SystemViewModel, NavigationPage> wi
                     onRefresh: () async => await mViewModel.naviJson(RequestType.refresh),
                     child: ListView.separated(
                       separatorBuilder: (context, index) {
-                        return Divider(thickness: 0.3.w, height: 0);
+                        return const Divider(thickness: 0.3, height: 0);
                       },
                       controller: _scrollController,
                       itemCount: it.value!.length,
                       itemBuilder: (context, index) {
                         var item = it.value![index];
                         return Padding(
-                          padding: EdgeInsets.fromLTRB(16.w, 8.w, 16.w, 8.w),
+                          padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                           child: Column(
                             children: [
                               Container(
                                 alignment: Alignment.centerLeft,
-                                padding: EdgeInsets.only(bottom: 8.w),
+                                padding: const EdgeInsets.only(bottom: 8),
                                 child: Text(
                                   item.name,
-                                  style: TextStyle(fontSize: 15.sp),
+                                  style: const TextStyle(fontSize: 15),
                                   textAlign: TextAlign.left,
                                 ),
                               ),
                               Container(
                                 alignment: Alignment.centerLeft,
                                 child: Wrap(
-                                  spacing: 2.w,
+                                  spacing: 2,
                                   children: item.articles
                                       .map((e) => InkWell(
                                             onTap: () {
-                                              context.goto(RouterConstant.webViewPage, extra: {'url': e.link, 'title': e.title});
+                                              goto(RouterConstant.WebViewPage, extra: {'url': e.link, 'title': e.title});
                                             },
                                             child: Chip(
                                               label: Text(
                                                 e.title,
                                                 style: TextStyle(
-                                                    fontSize: 10.sp, color: Color.fromARGB(255, Random().nextInt(190), Random().nextInt(190), Random().nextInt(190)), fontStyle: FontStyle.italic),
+                                                    fontSize: 10, color: Color.fromARGB(255, Random().nextInt(190), Random().nextInt(190), Random().nextInt(190)), fontStyle: FontStyle.italic),
                                               ),
-                                              labelPadding: EdgeInsets.only(left: 2.w, right: 2.w),
-                                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.w)),
+                                              labelPadding: const EdgeInsets.only(left: 2, right: 2),
+                                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                                             ),
                                           ))
                                       .toList(),
@@ -126,7 +131,4 @@ class _NavigationPageState extends BaseState<SystemViewModel, NavigationPage> wi
             ),
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

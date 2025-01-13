@@ -6,6 +6,7 @@
 import 'package:flutter/material.dart' show debugPrint;
 import 'package:wanandroid_flutter/page/home/model/article_entity.dart';
 import 'package:wanandroid_flutter/page/home/model/banner_entity.dart';
+import 'package:wanandroid_flutter/page/home/model/integrate_entity.dart';
 import 'package:wanandroid_flutter/page/main/model/user_info_entity.dart';
 import 'package:wanandroid_flutter/page/system/model/navigation_entity.dart';
 import 'package:wanandroid_flutter/page/wxchat/model/chapters_entity.dart';
@@ -127,7 +128,12 @@ class JsonConvert {
         if (value == null) {
           return null;
         }
-        return convertFuncMap[type]!(value as Map<String, dynamic>) as T;
+        var covertFunc = convertFuncMap[type]!;
+        if (covertFunc is Map<String, dynamic>) {
+          return covertFunc(value as Map<String, dynamic>) as T;
+        } else {
+          return covertFunc(Map<String, dynamic>.from(value)) as T;
+        }
       } else {
         throw UnimplementedError('$type unimplemented,you can try running the app again');
       }
@@ -144,6 +150,9 @@ class JsonConvert {
     }
     if (<BannerEntity>[] is M) {
       return data.map<BannerEntity>((Map<String, dynamic> e) => BannerEntity.fromJson(e)).toList() as M;
+    }
+    if (<IntegrateEntity>[] is M) {
+      return data.map<IntegrateEntity>((Map<String, dynamic> e) => IntegrateEntity.fromJson(e)).toList() as M;
     }
     if (<UserInfoEntity>[] is M) {
       return data.map<UserInfoEntity>((Map<String, dynamic> e) => UserInfoEntity.fromJson(e)).toList() as M;
@@ -177,6 +186,7 @@ class JsonConvertClassCollection {
     (ArticleEntity).toString(): ArticleEntity.fromJson,
     (ArticleTags).toString(): ArticleTags.fromJson,
     (BannerEntity).toString(): BannerEntity.fromJson,
+    (IntegrateEntity).toString(): IntegrateEntity.fromJson,
     (UserInfoEntity).toString(): UserInfoEntity.fromJson,
     (NavigationEntity).toString(): NavigationEntity.fromJson,
     (ChaptersEntity).toString(): ChaptersEntity.fromJson,

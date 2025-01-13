@@ -60,7 +60,7 @@ void initDio() {
   //httpClient
   dio.httpClientAdapter = IOHttpClientAdapter()
     ..onHttpClientCreate = (client) {
-      // if (kDebugMode) client.findProxy = (uri) => 'PROXY 10.11.4.143:8888';
+      // if (kDebugMode) client.findProxy = (uri) => 'PROXY 10.11.5.136:8888';
       client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
       return client;
     };

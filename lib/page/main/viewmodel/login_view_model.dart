@@ -15,6 +15,7 @@ class LoginViewModel extends BaseViewModel {
       await handle(
         () => getIt<MainService>().login(map),
         (it) => {
+          it.isLogin = true,
           CacheManager.instance.setUserInfo(it),
           eventBus.fire(LoginStateBus()),
         },

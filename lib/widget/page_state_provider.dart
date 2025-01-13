@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:wanandroid_flutter/base/base_view_model.dart';
+import 'package:wanandroid_flutter/base/resource_config.dart';
 import 'package:wanandroid_flutter/widget/selector_widget.dart';
-import 'package:wanandroid_flutter/res/colors.dart';
+import 'package:wanandroid_flutter/res/m_colors.dart';
 import 'package:wanandroid_flutter/util/common_util.dart';
-import 'package:wanandroid_flutter/util/string_util.dart';
+
+import '../res/m_string.dart';
 
 class PageStateProvider<T extends BaseViewModel> extends StatelessWidget {
   final T viewModel;
@@ -26,7 +27,7 @@ class PageStateProvider<T extends BaseViewModel> extends StatelessWidget {
           switch (it) {
             //加载中
             case PageState.loading:
-              return SpinKitCircle(color: MColors.appMain, size: 50.w);
+              return const SpinKitCircle(color: MColors.appMain, size: 50);
             //加载失败
             case PageState.failed:
               return GestureDetector(
@@ -40,10 +41,10 @@ class PageStateProvider<T extends BaseViewModel> extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset(
-                          CommonUtil.getImgPath("ui_loading_failed"),
-                          width: 250.w,
+                          getImgPath("ui_loading_failed"),
+                          width: 250,
                         ),
-                        Text(StringUtil.get().commonLoadingFailed)
+                        const Text(MString.commonLoadingFailed)
                       ],
                     ),
                   ),
@@ -62,10 +63,10 @@ class PageStateProvider<T extends BaseViewModel> extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset(
-                          CommonUtil.getImgPath("ui_oading_no_network"),
-                          width: 250.w,
+                          getImgPath("ui_oading_no_network"),
+                          width: 250,
                         ),
-                        Text(StringUtil.get().commonLoadingNoNetWork, textAlign: TextAlign.center)
+                        const Text(MString.commonLoadingNoNetWork, textAlign: TextAlign.center)
                       ],
                     ),
                   ),

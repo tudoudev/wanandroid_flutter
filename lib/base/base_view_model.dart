@@ -1,15 +1,16 @@
 import 'dart:async';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:easy_refresh/easy_refresh.dart';
-import 'package:event_bus/event_bus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wanandroid_flutter/base/base_entity.dart';
-import 'package:wanandroid_flutter/widget/selector_widget.dart';
 import 'package:wanandroid_flutter/constant/common_constant.dart';
 import 'package:wanandroid_flutter/constant/router_constant.dart';
-import 'package:wanandroid_flutter/util/string_util.dart';
+import 'package:wanandroid_flutter/widget/selector_widget.dart';
+
+import '../res/m_string.dart';
 
 class BaseViewModel extends ChangeNotifier {
 
@@ -79,7 +80,7 @@ class BaseViewModel extends ChangeNotifier {
     }
     //加载框
     if (requestType == RequestType.dialog) {
-      EasyLoading.show(status: StringUtil.get().commonReadyText);
+      EasyLoading.show(status: MString.tdLoadingWithPoint);
     }
   }
 
@@ -132,12 +133,12 @@ class BaseViewModel extends ChangeNotifier {
       message = e.errorMsg;
       //登录过期
       if (e.errorCode == -1001) {
-        GoRouter.of(CommonConstant.navKey.currentState!.context).push(RouterConstant.loginPage);
+        GoRouter.of(CommonConstant.navKey.currentState!.context).push(RouterConstant.LoginPage);
       }
     }
     //Http错误
     else {
-      message = StringUtil.get().commonOnFailure;
+      message = MString.commonOnFailure;
     }
     //加载界面
     if (requestType == RequestType.page) {

@@ -10,7 +10,7 @@ class SquareViewModel extends BaseViewModel {
   var articleEntityList = SelectorData<List<ArticleEntity>>(value: []);
 
   //文章
-  Future initView(RequestType page) async {
+  Future initHttp(RequestType page) async {
     await request(requestType: page, () async {
       await handle(
         () => getIt<SquareService>().userArticleList(requestNum),

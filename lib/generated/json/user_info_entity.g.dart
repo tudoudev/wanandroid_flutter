@@ -7,19 +7,9 @@ UserInfoEntity $UserInfoEntityFromJson(Map<String, dynamic> json) {
   if (admin != null) {
     userInfoEntity.admin = admin;
   }
-  final List<dynamic>? chapterTops = (json['chapterTops'] as List<dynamic>?)?.map(
-          (e) => e).toList();
-  if (chapterTops != null) {
-    userInfoEntity.chapterTops = chapterTops;
-  }
   final int? coinCount = jsonConvert.convert<int>(json['coinCount']);
   if (coinCount != null) {
     userInfoEntity.coinCount = coinCount;
-  }
-  final List<dynamic>? collectIds = (json['collectIds'] as List<dynamic>?)?.map(
-          (e) => e).toList();
-  if (collectIds != null) {
-    userInfoEntity.collectIds = collectIds;
   }
   final String? email = jsonConvert.convert<String>(json['email']);
   if (email != null) {
@@ -57,15 +47,17 @@ UserInfoEntity $UserInfoEntityFromJson(Map<String, dynamic> json) {
   if (username != null) {
     userInfoEntity.username = username;
   }
+  final bool? isLogin = jsonConvert.convert<bool>(json['isLogin']);
+  if (isLogin != null) {
+    userInfoEntity.isLogin = isLogin;
+  }
   return userInfoEntity;
 }
 
 Map<String, dynamic> $UserInfoEntityToJson(UserInfoEntity entity) {
   final Map<String, dynamic> data = <String, dynamic>{};
   data['admin'] = entity.admin;
-  data['chapterTops'] = entity.chapterTops;
   data['coinCount'] = entity.coinCount;
-  data['collectIds'] = entity.collectIds;
   data['email'] = entity.email;
   data['icon'] = entity.icon;
   data['id'] = entity.id;
@@ -75,15 +67,14 @@ Map<String, dynamic> $UserInfoEntityToJson(UserInfoEntity entity) {
   data['token'] = entity.token;
   data['type'] = entity.type;
   data['username'] = entity.username;
+  data['isLogin'] = entity.isLogin;
   return data;
 }
 
 extension UserInfoEntityExtension on UserInfoEntity {
   UserInfoEntity copyWith({
     bool? admin,
-    List<dynamic>? chapterTops,
     int? coinCount,
-    List<dynamic>? collectIds,
     String? email,
     String? icon,
     int? id,
@@ -93,12 +84,11 @@ extension UserInfoEntityExtension on UserInfoEntity {
     String? token,
     int? type,
     String? username,
+    bool? isLogin,
   }) {
     return UserInfoEntity()
       ..admin = admin ?? this.admin
-      ..chapterTops = chapterTops ?? this.chapterTops
       ..coinCount = coinCount ?? this.coinCount
-      ..collectIds = collectIds ?? this.collectIds
       ..email = email ?? this.email
       ..icon = icon ?? this.icon
       ..id = id ?? this.id
@@ -107,6 +97,7 @@ extension UserInfoEntityExtension on UserInfoEntity {
       ..publicName = publicName ?? this.publicName
       ..token = token ?? this.token
       ..type = type ?? this.type
-      ..username = username ?? this.username;
+      ..username = username ?? this.username
+      ..isLogin = isLogin ?? this.isLogin;
   }
 }

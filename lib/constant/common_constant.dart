@@ -6,6 +6,4 @@ class CommonConstant {
   static const String locale = 'locale'; //语言
   static final navKey = GlobalKey<NavigatorState>(); //全局key
 
-  static const String keyCookies = 'keyCookies';
-  static const String keyUserInfo = 'keyUserInfo';
 }

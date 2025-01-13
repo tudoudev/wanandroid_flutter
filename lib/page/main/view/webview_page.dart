@@ -17,12 +17,13 @@ class WebViewPage extends StatefulWidget {
 class _WebViewPageState extends BaseState<WebViewViewModel, WebViewPage> {
   late String title;
   late String url;
+  bool isExiting = false;
 
   bool isLoad = true;
   late WebViewController controller;
 
   @override
-  Widget build(BuildContext context) {
+  Widget initView(BuildContext context) {
     final extraData = GoRouterState.of(context).extra! as Map<String, String>; // 获取额外数据
     title = extraData["title"].toString();
     url = extraData["url"].toString();
@@ -33,13 +34,14 @@ class _WebViewPageState extends BaseState<WebViewViewModel, WebViewPage> {
       ..setNavigationDelegate(
         NavigationDelegate(
           onProgress: (int progress) {
-            // Update loading bar.
           },
           onPageStarted: (String url) {
-            mViewModel.changePageState(PageState.loading);
+            //加上isExiting是因为退出界面依然会调用NavigationDelegate
+            if (!isExiting) mViewModel.changePageState(PageState.loading);
           },
           onPageFinished: (String url) {
-            mViewModel.changePageState(PageState.success);
+            //加上isExiting是因为退出界面依然会调用NavigationDelegate
+            if (!isExiting) mViewModel.changePageState(PageState.success);
           },
           onWebResourceError: (WebResourceError error) async {
             final List<ConnectivityResult> connectivityResult = await (Connectivity().checkConnectivity());
@@ -62,7 +64,12 @@ class _WebViewPageState extends BaseState<WebViewViewModel, WebViewPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
-        leading: IconButton(icon: const Icon(Icons.arrow_back_ios), onPressed: () => context.pop()),
+        leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios),
+            onPressed: () {
+              isExiting = true;
+              context.pop();
+            }),
       ),
       body: PageStateProvider(
         viewModel: mViewModel,

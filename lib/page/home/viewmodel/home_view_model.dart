@@ -13,7 +13,7 @@ class HomeViewModel extends BaseViewModel {
   var articleEntityList = SelectorData<List<ArticleEntity>>(value: []);
 
   //初始化view
-  Future initView() async {
+  Future initHttp() async {
     await request(requestType: RequestType.page, () async {
       //异步请求
       await Future.wait([

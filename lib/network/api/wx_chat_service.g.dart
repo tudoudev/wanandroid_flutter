@@ -6,7 +6,7 @@ part of 'wx_chat_service.dart';
 // RetrofitGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
+// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element
 
 class _WxChatService implements WxChatService {
   _WxChatService(
@@ -43,8 +43,8 @@ class _WxChatService implements WxChatService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = BaseEntity<List<ChaptersEntity>>.fromJson(_result.data!);
-    return value;
+    final _value = BaseEntity<List<ChaptersEntity>>.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -73,9 +73,9 @@ class _WxChatService implements WxChatService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value =
+    final _value =
         BaseEntity<PagingEntity<ArticleEntity>>.fromJson(_result.data!);
-    return value;
+    return _value;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

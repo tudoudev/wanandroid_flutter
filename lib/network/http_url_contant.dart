@@ -5,6 +5,9 @@ class HttpUrlContant {
   static const String lgCoinList = "/lg/coin/list/{pageNum}/json"; //获取个人积分获取列表
   static const String login = "/user/login"; //登录
   static const String register = "/user/register"; //注册
+  static const String collect = "/lg/collect/{id}/json"; //收藏
+  static const String uncollect = "/lg/uncollect_originId/{id}/json"; //取消收藏
+  static const String collectList = "/lg/collect/list/{pageNum}/json"; //收藏列表
 
   //首页
   static const String homeBanner = "/banner/json"; //banner

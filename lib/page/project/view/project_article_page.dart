@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:wanandroid_flutter/base/app_router.dart';
 import 'package:wanandroid_flutter/base/base_state.dart';
+import 'package:wanandroid_flutter/base/base_state_keep_alive.dart';
 import 'package:wanandroid_flutter/base/base_view_model.dart';
 import 'package:wanandroid_flutter/widget/page_state_provider.dart';
 import 'package:wanandroid_flutter/widget/refresh_widget.dart';
 import 'package:wanandroid_flutter/widget/selector_widget.dart';
 import 'package:wanandroid_flutter/constant/router_constant.dart';
-import 'package:wanandroid_flutter/extension/router_helper.dart';
 import 'package:wanandroid_flutter/page/home/model/article_entity.dart';
 import 'package:wanandroid_flutter/page/wxchat/viewmodel/wxchat_view_model.dart';
-import 'package:wanandroid_flutter/res/colors.dart';
+import 'package:wanandroid_flutter/res/m_colors.dart';
 import 'package:wanandroid_flutter/widget/custom_network_image.dart';
 
-class ProjectArticlePage extends StatefulWidget {
+class ProjectArticlePage extends StatefulHookWidget {
   final int id;
 
   const ProjectArticlePage({super.key, required this.id});
@@ -21,8 +23,8 @@ class ProjectArticlePage extends StatefulWidget {
   State<ProjectArticlePage> createState() => _ProjectArticlePageState();
 }
 
-class _ProjectArticlePageState extends BaseState<WxChatViewModel, ProjectArticlePage> with AutomaticKeepAliveClientMixin {
-  final ScrollController _scrollController = ScrollController();
+class _ProjectArticlePageState extends BaseStateKeepAlive<WxChatViewModel, ProjectArticlePage> {
+  late ScrollController _scrollController;
 
   // 是否显示悬浮按钮
   bool _isShowFAB = false;
@@ -32,23 +34,28 @@ class _ProjectArticlePageState extends BaseState<WxChatViewModel, ProjectArticle
     super.initState();
     //初始化view
     mViewModel.wxArticleList(RequestType.page, widget.id);
-    //listview滚动监听
-    _scrollController.addListener(() {
-      if (_scrollController.offset < 200 && _isShowFAB) {
-        setState(() {
-          _isShowFAB = false;
-        });
-      } else if (_scrollController.offset >= 200 && !_isShowFAB) {
-        setState(() {
-          _isShowFAB = true;
-        });
-      }
-    });
   }
 
   @override
-  Widget build(BuildContext context) {
-    super.build(context);
+  Widget initView(BuildContext context) {
+    _scrollController = useScrollController();
+    //listview滚动监听
+    useEffect(() {
+      temp() {
+        if (_scrollController.offset < 200 && _isShowFAB) {
+          setState(() {
+            _isShowFAB = false;
+          });
+        } else if (_scrollController.offset >= 200 && !_isShowFAB) {
+          setState(() {
+            _isShowFAB = true;
+          });
+        }
+      }
+
+      _scrollController.addListener(temp);
+      return () => _scrollController.removeListener(temp);
+    }, []);
     return Scaffold(
       body: PageStateProvider(
         viewModel: mViewModel,
@@ -66,20 +73,20 @@ class _ProjectArticlePageState extends BaseState<WxChatViewModel, ProjectArticle
                     child: ListView.separated(
                       controller: _scrollController,
                       separatorBuilder: (context, index) {
-                        return Divider(thickness: 0.3.w, height: 0);
+                        return const Divider(thickness: 0.3, height: 0);
                       },
                       itemCount: it.value!.length,
                       itemBuilder: (context, index) {
                         var item = it.value![index];
                         return InkWell(
                           onTap: () {
-                            context.goto(RouterConstant.webViewPage, extra: {'url': item.link, 'title': item.title});
+                            goto(RouterConstant.WebViewPage, extra: {'url': item.link, 'title': item.title});
                           },
                           child: Row(children: [
                             Container(
-                              margin: EdgeInsets.fromLTRB(16.w, 8.w, 8.w, 8.w),
-                              height: 130.w,
-                              width: 80.w,
+                              margin: const EdgeInsets.fromLTRB(16, 8, 8, 8),
+                              height: 130,
+                              width: 80,
                               child: CustomNetworkImage(imageUrl: item.envelopePic),
                             ),
                             Expanded(
@@ -87,39 +94,39 @@ class _ProjectArticlePageState extends BaseState<WxChatViewModel, ProjectArticle
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.fromLTRB(8.w, 8.w, 16.w, 0.w),
+                                    padding: const EdgeInsets.fromLTRB(8, 8, 16, 0),
                                     child: Text(
                                       item.title,
-                                      style: TextStyle(fontSize: 14.sp),
+                                      style: const TextStyle(fontSize: 14),
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.fromLTRB(8.w, 8.w, 16.w, 0.w),
+                                    padding: const EdgeInsets.fromLTRB(8, 8, 16, 0),
                                     child: Text(
                                       item.desc,
-                                      style: TextStyle(fontSize: 12.sp, color: MColors.gray_66),
+                                      style: const TextStyle(fontSize: 12, color: MColors.gray_66),
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.fromLTRB(8.w, 8.w, 16.w, 0.w),
+                                    padding: const EdgeInsets.fromLTRB(8, 8, 16, 0),
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: <Widget>[
                                         Text(
                                           item.author.isNotEmpty ? item.author : item.shareUser,
-                                          style: TextStyle(
-                                            fontSize: 12.sp,
+                                          style: const TextStyle(
+                                            fontSize: 12,
                                             color: MColors.gray_66,
                                           ),
                                         ),
                                         Text(
                                           item.niceDate,
-                                          style: TextStyle(
-                                            fontSize: 12.sp,
+                                          style: const TextStyle(
+                                            fontSize: 12,
                                             color: MColors.gray_66,
                                           ),
                                         )
@@ -127,11 +134,11 @@ class _ProjectArticlePageState extends BaseState<WxChatViewModel, ProjectArticle
                                     ),
                                   ),
                                   Container(
-                                    padding: EdgeInsets.fromLTRB(16.w, 10.w, 16.w, 10.w),
+                                    padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
                                     alignment: const Alignment(1, 0),
                                     child: Icon(
-                                      Icons.favorite_border,
-                                      size: 22.w,
+                                      context.watch<WxChatViewModel>().articleEntity.collect ? Icons.favorite : Icons.favorite_border,
+                                      size: 22,
                                       color: MColors.gray_66,
                                     ),
                                   ),
@@ -160,7 +167,4 @@ class _ProjectArticlePageState extends BaseState<WxChatViewModel, ProjectArticle
             ),
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

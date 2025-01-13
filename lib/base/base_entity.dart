@@ -8,6 +8,8 @@
 import 'package:wanandroid_flutter/generated/json/base/json_convert_content.dart';
 import 'package:wanandroid_flutter/page/home/model/article_entity.dart';
 
+import '../page/home/model/integrate_entity.dart';
+
 /*
  * Description：<网络请求响应解析的基类>
  * 这里T为泛型
@@ -64,5 +66,6 @@ class PagingEntity<T> {
   //实体map
   static Map<String, JsonConvertFunction> map = {
     (ArticleEntity).toString(): PagingEntity<ArticleEntity>.fromJson,
+    (IntegrateEntity).toString(): PagingEntity<IntegrateEntity>.fromJson,
   };
 }

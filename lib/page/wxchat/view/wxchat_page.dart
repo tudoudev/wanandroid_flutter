@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:wanandroid_flutter/base/base_state.dart';
+import 'package:wanandroid_flutter/base/base_state_keep_alive.dart';
+import 'package:wanandroid_flutter/page/wxchat/model/chapters_entity.dart';
 import 'package:wanandroid_flutter/widget/page_state_provider.dart';
-import 'package:wanandroid_flutter/page/home/view/article_page.dart';
-import 'package:wanandroid_flutter/page/main/view/drawer_page.dart';
+import 'package:wanandroid_flutter/page/common/view/article_page.dart';
 import 'package:wanandroid_flutter/page/wxchat/viewmodel/wxchat_view_model.dart';
-import 'package:wanandroid_flutter/util/string_util.dart';
+
+import '../../../res/m_string.dart';
 
 /*
  * Description：<公众号>
@@ -18,52 +21,58 @@ class WxChatPage extends StatefulWidget {
   State<WxChatPage> createState() => _WxChatPageState();
 }
 
-class _WxChatPageState extends BaseState<WxChatViewModel, WxChatPage> with AutomaticKeepAliveClientMixin, TickerProviderStateMixin {
-  late TabController _tabController;
-
+class _WxChatPageState extends BaseStateKeepAlive<WxChatViewModel, WxChatPage> {
   @override
   void initState() {
     super.initState();
     //初始化请求
-    mViewModel.initView();
+    mViewModel.initHttp();
   }
+
+  @override
+  Widget initView(BuildContext context) {
+    return PageStateProvider(
+      viewModel: mViewModel,
+      onLoadRetry: () => mViewModel.initHttp(),
+      builder: (context) => ContentWidget(chaptersEntityList: mViewModel.chaptersEntityList.value!),
+    );
+  }
+}
+
+class ContentWidget extends StatefulHookWidget {
+  final List<ChaptersEntity> chaptersEntityList;
+
+  const ContentWidget({super.key, required this.chaptersEntityList});
+
+  @override
+  State<ContentWidget> createState() => _ContentWidgetState();
+}
+
+class _ContentWidgetState extends State<ContentWidget> {
+  late TabController _tabController;
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
-    return Scaffold(
-      drawer: const DrawerScreen(),
-      appBar: AppBar(
-        title: Text(StringUtil.get().commonText_3),
-      ),
-      body: PageStateProvider(
-        viewModel: mViewModel,
-        onLoadRetry: () => mViewModel.initView(),
-        onInit: () => _tabController = TabController(length: mViewModel.chaptersEntityList.value!.length, vsync: this),
-        builder: (context) => Column(
-          children: [
-            Container(
-              color: Theme.of(context).primaryColor,
-              child: TabBar(
-                controller: _tabController,
-                tabAlignment: TabAlignment.start,
-                indicatorSize: TabBarIndicatorSize.tab,
-                isScrollable: true,
-                tabs: mViewModel.chaptersEntityList.value!.map((item) => Tab(text: item.name)).toList(),
-              ),
-            ),
-            Expanded(
-              child: TabBarView(
-                controller: _tabController,
-                children: mViewModel.chaptersEntityList.value!.map((item) => ArticlePage(id: item.id)).toList(),
-              ),
-            )
-          ],
+    _tabController = useTabController(initialLength: widget.chaptersEntityList.length);
+    return Column(
+      children: [
+        Container(
+          color: Theme.of(context).primaryColor,
+          child: TabBar(
+            controller: _tabController,
+            tabAlignment: TabAlignment.start,
+            indicatorSize: TabBarIndicatorSize.tab,
+            isScrollable: true,
+            tabs: widget.chaptersEntityList.map((item) => Tab(text: item.name)).toList(),
+          ),
         ),
-      ),
+        Expanded(
+          child: TabBarView(
+            controller: _tabController,
+            children: widget.chaptersEntityList.map((item) => ArticlePage(id: item.id)).toList(),
+          ),
+        )
+      ],
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

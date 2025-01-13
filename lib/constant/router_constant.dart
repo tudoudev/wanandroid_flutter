@@ -1,9 +1,9 @@
 class RouterConstant {
   //main
-  static const String splashPage = "/splashPage";
-  static const String mainPage = "/mainPage";
-  static const String webViewPage = "/webViewPage";
-  static const String myPointsPage = "/myPointsPage";
-  static const String loginPage = "/loginPage";
-  static const String registerPage = "/registerPage";
+  static const String MainPage = "/MainPage";
+  static const String WebViewPage = "/WebViewPage";
+  static const String MyPointsPage = "/MyPointsPage";
+  static const String LoginPage = "/LoginPage";
+  static const String RegisterPage = "/RegisterPage";
+  static const String MyCollectPage = "/MyCollectPage";
 }

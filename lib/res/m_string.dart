@@ -1,0 +1,71 @@
+class MString {
+  static const String appName = "玩安卓";
+
+  static const String tdOpen = "开";
+  static const String tdClose = "关";
+  static const String tdCancel = "取消";
+  static const String tdConfirm = "确认";
+  static const String tdOther = "其他";
+  static const String tdReset = "重置";
+  static const String tdLoading = "加载中";
+  static const String tdLoadingWithPoint = "加载中...";
+  static const String tdKnew = "知道了";
+  static const String tdRefreshing = "正在刷新";
+  static const String tdReleaseRefresh = "松开刷新";
+  static const String tdDays = "天";
+  static const String tdHours = "时";
+  static const String tdMinutes = "分";
+  static const String tdSeconds = "秒";
+  static const String tdMilliseconds = "毫秒";
+
+  static const String commonDragText = "上拉加载";
+  static const String commonProcessedText = "成功了";
+  static const String commonFailedText = "失败了";
+  static const String commonNoMoreText = "没有更多数据了";
+  static const String commonLoadingFailed = "加载失败，点击重试";
+  static const String commonLoadingNoNetWork = "网络失联了…\n请联网后点击重试";
+  static const String commonNoNetWork = "网络无连接 ;请检查网络";
+  static const String commonOnFailure = "服务器繁忙，请稍后再试";
+
+  static const String commonExit = "再次点击退出应用";
+  static const String commonWxts = "温馨提示";
+  static const String commonExecuteSuccess = "操作成功";
+  static const String commonEmptyData = "暂无数据";
+  static const String commonNoData = "--";
+  static const String commonSearch = "搜索";
+  static const String commonAll = "全部";
+
+  static const String commonText_1 = "首页";
+  static const String commonText_2 = "广场";
+  static const String commonText_3 = "公众号";
+  static const String commonText_4 = "体系";
+  static const String commonText_5 = "项目";
+  static const String commonText_6 = "导航";
+  static const String commonText_7 = "置顶";
+  static const String commonText_8 = "新";
+  static const String commonText_9 = "去登录";
+  static const String commonText_10 = "等级:";
+  static const String commonText_11 = "排名:";
+  static const String commonText_12 = "我的积分";
+  static const String commonText_13 = "我的收藏";
+  static const String commonText_14 = "我的分享";
+  static const String commonText_15 = "登录";
+  static const String commonText_16 = "用户登录";
+  static const String commonText_17 = "请使用WanAndroid账号登录";
+  static const String commonText_18 = "用户名";
+  static const String commonText_19 = "请输入用户名";
+  static const String commonText_20 = "密码";
+  static const String commonText_21 = "请输入密码";
+  static const String commonText_22 = "还没有账号，注册一个？";
+  static const String commonText_23 = "注册";
+  static const String commonText_24 = "注册用户";
+  static const String commonText_25 = "用户注册后才可以登录";
+  static const String commonText_26 = "再次输入密码";
+  static const String commonText_27 = "请再次输入密码";
+  static const String commonText_28 = "注册成功";
+  static const String commonText_29 = "登录成功";
+  static const String commonText_30 = "退出登录";
+  static const String commonText_31 = "确定退出登录吗?";
+  static const String commonText_32 = "收藏成功~";
+  static const String commonText_33 = "已取消收藏";
+}

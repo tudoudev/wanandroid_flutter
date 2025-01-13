@@ -1,32 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:wanandroid_flutter/base/app_router.dart';
 import 'package:wanandroid_flutter/base/base_state.dart';
+import 'package:wanandroid_flutter/base/base_state_keep_alive.dart';
 import 'package:wanandroid_flutter/base/base_view_model.dart';
+import 'package:wanandroid_flutter/page/common/widget/article_widget.dart';
+import 'package:wanandroid_flutter/res/m_string.dart';
 import 'package:wanandroid_flutter/widget/page_state_provider.dart';
 import 'package:wanandroid_flutter/widget/refresh_widget.dart';
 import 'package:wanandroid_flutter/widget/selector_widget.dart';
+import 'package:wanandroid_flutter/constant/router_constant.dart';
 import 'package:wanandroid_flutter/page/home/model/article_entity.dart';
-import 'package:wanandroid_flutter/page/common/widget/article_widget.dart';
-import 'package:wanandroid_flutter/page/main/view/drawer_page.dart';
-import 'package:wanandroid_flutter/page/square/viewmodel/square_view_model.dart';
+import 'package:wanandroid_flutter/page/wxchat/viewmodel/wxchat_view_model.dart';
+import 'package:wanandroid_flutter/res/m_colors.dart';
 
-import '../../../base/base_state_keep_alive.dart';
-import '../../../res/m_string.dart';
+class ArticlePage extends StatefulHookWidget {
+  final int id;
 
-/*
- * Description：<广场>
- * Created by：zzl
- * Time：2024/3/8  09:10
- */
-class SquarePage extends StatefulHookWidget {
-  const SquarePage({super.key});
+  const ArticlePage({super.key, required this.id});
 
   @override
-  State<SquarePage> createState() => _SquarePageState();
+  State<ArticlePage> createState() => _ArticlePageState();
 }
 
-class _SquarePageState extends BaseStateKeepAlive<SquareViewModel, SquarePage> {
-  late ScrollController _scrollController;
+class _ArticlePageState extends BaseStateKeepAlive<WxChatViewModel, ArticlePage> {
+  late ScrollController _scrollController ;
 
   // 是否显示悬浮按钮
   bool _isShowFAB = false;
@@ -34,8 +32,8 @@ class _SquarePageState extends BaseStateKeepAlive<SquareViewModel, SquarePage> {
   @override
   void initState() {
     super.initState();
-    //初始化请求
-    mViewModel.initHttp(RequestType.page);
+    //初始化view
+    mViewModel.wxArticleList(RequestType.page, widget.id);
   }
 
   @override
@@ -61,17 +59,17 @@ class _SquarePageState extends BaseStateKeepAlive<SquareViewModel, SquarePage> {
     return Scaffold(
       body: PageStateProvider(
         viewModel: mViewModel,
-        onLoadRetry: () => mViewModel.initHttp(RequestType.page),
+        onLoadRetry: () => mViewModel.wxArticleList(RequestType.page, widget.id),
         builder: (context) => Column(
           children: [
-            SelectorWidget<SquareViewModel, SelectorData<List<ArticleEntity>>>(
-              selector: (context, _) => mViewModel.articleEntityList,
+            SelectorWidget<WxChatViewModel, SelectorData<List<ArticleEntity>>>(
+              selector: (context, _) => mViewModel.wxArticleEntityList,
               builder: (context, it, child) {
                 return Expanded(
                   child: RefreshWidget(
                     viewModel: mViewModel,
-                    onRefresh: () async => await mViewModel.initHttp(RequestType.refresh),
-                    onLoad: () async => await mViewModel.initHttp(RequestType.refresh),
+                    onRefresh: () async => await mViewModel.wxArticleList(RequestType.refresh, widget.id),
+                    onLoad: () async => await mViewModel.wxArticleList(RequestType.refresh, widget.id),
                     child: ListView.separated(
                       controller: _scrollController,
                       separatorBuilder: (context, index) {
